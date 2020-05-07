@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const triviaSchema = new Schema({
+const triviaSchema = new mongoose.Schema({
     //dex refers to Pokedex information from flavour text
   dex: [
     {
@@ -42,6 +42,6 @@ const triviaSchema = new Schema({
   }]
 });
 
-const Example = mongoose.model("Trivia", triviaSchema);
+const Trivia = mongoose.model("Trivia", triviaSchema);
 
 module.exports = Trivia;

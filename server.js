@@ -3,14 +3,13 @@ const path = require("path");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const passport = require("passport");
-const GithubStrategy = require("passport-github2");
 
 const PORT = process.env.PORT || 3001;
 const app = express();
 const apiRoutes = require("./routes/apiRoutes");
+const authRoutes = require("./routes/authRoutes")
 
 // Define middleware here
-app.use(cors()); // allows the server to make requests to a different domain
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 // Serve up static assets (usually on heroku)
@@ -18,14 +17,20 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
+app.use(cors()); // allows the server to make requests to a different domain
+app.use(passport.initialize());
+app.use(passport.session());
+
 // Define Github Strategy
-passport.use(new GithubStrategy({
+const GitHubStrategy = require("passport-github2").Strategy;
+
+let strategy = new GithubStrategy({
   clientID: process.env.NODE_ENV === "production" ? process.env.GITHUB_CLIENT_ID_PRODUCTION : process.env.GITHUB_CLIENT_ID,
   clientSecret: process.env.NODE_ENV === "production" ? process.env.GITHUB_CLIENT_SECRET_PRODUCTION : process.env.GITHUB_CLIENT_SECRET,
   callbackURL: process.env.NODE_ENV === "production" ? null : "/auth/github/callback"
 },
   (accessToken, refreshToken, profile, done) => done(null, profile)
-));
+);
 
 passport.serializeUser((user, done) => done(null, user));
 
@@ -48,7 +53,8 @@ mongoose.connect(
 );
 
 // Use apiRoutes
-app.use("/api", apiRoutes);
+app.use("/api", apiRoutes(passport));
+app.use("/auth", authRoutes);
 
 app.listen(PORT, function() {
   console.log(`🌎 ==> API server now on port ${PORT}!`);

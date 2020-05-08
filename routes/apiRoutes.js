@@ -16,6 +16,6 @@ router.get("/random/:count", (req, res) => {
   .then(random => res.json(random))
   .catch(err => res.json(err))
 })
-//for push
+
 
 module.exports = router;

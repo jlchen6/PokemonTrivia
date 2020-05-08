@@ -10,6 +10,7 @@ const app = express();
 const apiRoutes = require("./routes/apiRoutes");
 
 // Define middleware here
+app.use(cors()); // allows the server to make requests to a different domain
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 // Serve up static assets (usually on heroku)

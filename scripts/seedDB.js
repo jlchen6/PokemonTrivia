@@ -39,7 +39,7 @@ mongoose.connect(
             "GRASS",
             "POISON"
         ],
-        hintImage: "../client/public/images/hintImages/2.pn",
+        hintImage: "../client/public/images/hintImages/2.png",
         pokeSprite: "../client/public/images/sprites/sprite002.gif",
         possibleChoices: [
             "Bulbasaur",
@@ -59,7 +59,7 @@ mongoose.connect(
             "GRASS",
             "POISON"
         ],
-        hintImage: "../client/public/images/hintImages/3.pn",
+        hintImage: "../client/public/images/hintImages/3.png",
         pokeSprite: "../client/public/images/sprites/sprite003.gif",
         possibleChoices: [
             "Bulbasaur",
@@ -77,7 +77,7 @@ mongoose.connect(
         dexNumber: 4,
         pokeName: "Charmander",
         type: "FIRE",
-        hintImage: "../client/public/images/hintImages/4.pn",
+        hintImage: "../client/public/images/hintImages/4.png",
         pokeSprite: "../client/public/images/sprites/sprite004.gif",
         possibleChoices: [
             "Vulpix",
@@ -96,7 +96,7 @@ mongoose.connect(
         dexNumber: 5,
         pokeName: "Charmeleon",
         type: "FIRE",
-        hintImage: "../client/public/images/hintImages/5.pn",
+        hintImage: "../client/public/images/hintImages/5.png",
         pokeSprite: "../client/public/images/sprites/sprite005.gif",
         possibleChoices: [
             "Charmander",
@@ -118,7 +118,7 @@ mongoose.connect(
            "FIRE",
            "FLYING"
        ],
-       hintImage: "../client/public/images/hintImages/6.pn",
+       hintImage: "../client/public/images/hintImages/6.png",
        pokeSprite: "../client/public/images/sprites/sprite006.gif",
        possibleChoices: [
             "Charmander",
@@ -137,7 +137,7 @@ mongoose.connect(
         dexNumber: 7,
         pokeName: "Squirtle",
         type: "WATER",
-        hintImage: "../client/public/images/hintImages/7.pn",
+        hintImage: "../client/public/images/hintImages/7.png",
         pokeSprite: "../client/public/images/sprites/sprite007.gif",
         possibleChoices: [
             "Poliwag",
@@ -156,7 +156,7 @@ mongoose.connect(
         dexNumber: 8,
         pokeName: "Wartortle",
         type: "WATER",
-        hintImage: "../client/public/images/hintImages/8.pn",
+        hintImage: "../client/public/images/hintImages/8.png",
         pokeSprite: "../client/public/images/sprites/sprite008.gif",
         possibleChoices: [
             "Eevee",
@@ -177,7 +177,7 @@ mongoose.connect(
         dexNumber: 9,
         pokeName: "Blastoise",
         type: "WATER",
-        hintImage: "../client/public/images/hintImages/9.pn",
+        hintImage: "../client/public/images/hintImages/9.png",
         pokeSprite: "../client/public/images/sprites/sprite009.gif",
         possibleChoices: [
             "Wigglytuff",
@@ -197,7 +197,7 @@ mongoose.connect(
         dexNumber: 10,
         pokeName: "Caterpie",
         type: "BUG",
-        hintImage: "../client/public/images/hintImages/10.pn",
+        hintImage: "../client/public/images/hintImages/10.png",
         pokeSprite: "../client/public/images/sprites/sprite010.gif",
         possibleChoices: [
             "Weedle",
@@ -215,7 +215,7 @@ mongoose.connect(
         dexNumber: 11,
         pokeName: "Metapod",
         type: "BUG",
-        hintImage: "../client/public/images/hintImages/11.pn",
+        hintImage: "../client/public/images/hintImages/11.png",
         pokeSprite: "../client/public/images/sprites/sprite011.gif",
         possibleChoices: [
             "Paras",
@@ -236,7 +236,7 @@ mongoose.connect(
            "BUG",
            "FLYING"
        ],
-       hintImage: "../client/public/images/hintImages/12.pn",
+       hintImage: "../client/public/images/hintImages/12.png",
        pokeSprite: "../client/public/images/sprites/sprite012.gif",
        possibleChoices: [
            "Fearow",
@@ -257,7 +257,7 @@ mongoose.connect(
             "BUG",
             "POISON"
         ],
-        hintImage: "../client/public/images/hintImages/13.pn",
+        hintImage: "../client/public/images/hintImages/13.png",
         pokeSprite: "../client/public/images/sprites/sprite013.gif",
         possibleChoices: [
             "Weedle",
@@ -279,7 +279,7 @@ mongoose.connect(
             "BUG",
             "POISON"
         ],
-        hintImage: "../client/public/images/hintImages/14.pn",
+        hintImage: "../client/public/images/hintImages/14.png",
         pokeSprite: "../client/public/images/sprites/sprite014.gif",
         possibleChoices: [
             "Metapod",
@@ -302,7 +302,7 @@ mongoose.connect(
             "BUG",
             "POISON"
         ],
-        hintImage: "../client/public/images/hintImages/15.pn",
+        hintImage: "../client/public/images/hintImages/15.png",
         pokeSprite: "../client/public/images/sprites/sprite015.gif",
         possibleChoices: [
             "Venonat",
@@ -323,7 +323,7 @@ mongoose.connect(
             "NORMAL",
             "FLYING"
         ],
-        hintImage: "../client/public/images/hintImages/16.pn",
+        hintImage: "../client/public/images/hintImages/16.png",
         pokeSprite: "../client/public/images/sprites/sprite016.gif",
         possibleChoices: [
             "Pidgeot",
@@ -345,7 +345,7 @@ mongoose.connect(
             "NORMAL",
             "FLYING"
         ],
-        hintImage: "../client/public/images/hintImages/17.pn",
+        hintImage: "../client/public/images/hintImages/17.png",
         pokeSprite: "../client/public/images/sprites/sprite017.gif",
         possibleChoices: [
             "Pidgeot",
@@ -366,7 +366,7 @@ mongoose.connect(
             "NORMAL",
             "FLYING"
         ],
-        hintImage: "../client/public/images/hintImages/18.pn",
+        hintImage: "../client/public/images/hintImages/18.png",
         pokeSprite: "../client/public/images/sprites/sprite018.gif",
         possibleChoices: [
             "Spearow",
@@ -384,7 +384,7 @@ mongoose.connect(
         dexNumber: 19,
         pokeName: "Rattata",
         type: "NORMAL",
-        hintImage: "../client/public/images/hintImages/19.pn",
+        hintImage: "../client/public/images/hintImages/19.png",
         pokeSprite: "../client/public/images/sprites/sprite019.gif",
         possibleChoices: [
             "Meowth",
@@ -402,7 +402,7 @@ mongoose.connect(
         dexNumber: 20,
         pokeName: "Raticate",
         type: "NORMAL",
-        hintImage: "../client/public/images/hintImages/20.pn",
+        hintImage: "../client/public/images/hintImages/20.png",
         pokeSprite: "../client/public/images/sprites/sprite020.gif",
         possibleChoices: [
             "Meowth",
@@ -424,7 +424,7 @@ mongoose.connect(
             "NORMAL",
             "FLYING"
         ],
-        hintImage: "../client/public/images/hintImages/21.pn",
+        hintImage: "../client/public/images/hintImages/21.png",
         pokeSprite: "../client/public/images/sprites/sprite021.gif",
         possibleChoices: [
             "Fearow",
@@ -445,7 +445,7 @@ mongoose.connect(
             "NORMAL",
             "FLYING"
         ],
-        hintImage: "../client/public/images/hintImages/22.pn",
+        hintImage: "../client/public/images/hintImages/22.png",
         pokeSprite: "../client/public/images/sprites/sprite022.gif",
         possibleChoices: [
             "Spearow",
@@ -463,7 +463,7 @@ mongoose.connect(
         dexNumber: 23,
         pokeName: "Ekans",
         type: "POISON",
-        hintImage: "../client/public/images/hintImages/23.pn",
+        hintImage: "../client/public/images/hintImages/23.png",
         pokeSprite: "../client/public/images/sprites/sprite023.gif",
         possibleChoices: [
             "Haunter",
@@ -481,7 +481,7 @@ mongoose.connect(
         dexNumber: 24,
         pokeName: "Arbok",
         type: "POISON",
-        hintImage: "../client/public/images/hintImages/24.pn",
+        hintImage: "../client/public/images/hintImages/24.png",
         pokeSprite: "../client/public/images/sprites/sprite024.gif",
         possibleChoices: [
             "Tentacool",
@@ -501,7 +501,7 @@ mongoose.connect(
         dexNumber: 25,
         pokeName: "Pikachu",
         type: "ELECTRIC",
-        hintImage: "../client/public/images/hintImages/25.pn",
+        hintImage: "../client/public/images/hintImages/25.png",
         pokeSprite: "../client/public/images/sprites/sprite025.gif",
         possibleChoices: [
             "Electrabuzz",

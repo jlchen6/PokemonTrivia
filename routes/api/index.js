@@ -3,10 +3,10 @@ const router = require("express").Router();
 const triviaRoutes = require("./trivia");
 const userRoutes = require("./user");
 
-// Book routes
+// Pokemon Trivia routes
 router.use("/pokemon", triviaRoutes);
 
-// Google Routes
+// User Routes
 router.use("/users", userRoutes);
 
 // For anything else, render the html page

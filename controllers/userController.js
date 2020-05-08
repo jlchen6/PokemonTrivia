@@ -2,12 +2,18 @@ const db = require("../models");
 
 // Define methods for the userController
 module.exports = {
-    findById: function(req, res) {
-        db.User.findById(req.params.id)
+    findByUsername: function(req, res) {
+        db.User.find({username: req.params.username})
         .then(dbUser => res.json(dbUser))
         .catch(err => res.json(err));
     },
-    createOrUpdate: function(user) { //If new user, create, else update user
+    findAll: function(req, res) {
+        db.User.find({})
+        .then(dbUsers => res.json(dbUsers))
+        .catch(err => res.json(err));
+    },
+    createOrUpdate: function(user) { 
+        //If new user, create, else update user
         return db.User
             .find({username: user.username})
             .then(dbUser => { //returns an array of user objects

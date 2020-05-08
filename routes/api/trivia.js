@@ -1,22 +1,11 @@
 const router = require("express").Router();
-const db = require("../models");
+const triviaController = require("../../controllers/triviaController")
 
-// Get the trivia data for all pokemon in the DB. 
-router.get("/pokemon", (req, res) => {
- 
-  db.Trivia.find({})
-    .then(trivia => res.json(trivia))
-    .catch(err => res.json(err));
-});
+// matches with "/api/pokemon"
+router.route("/")
+.get(triviaController.findAll)
 
-// Get "count" number of random trivia entries from the DB. Useful for populating trivia questions
-router.get("/random/:count", (req, res) => {
-  db.Trivia.aggregate(
-    [{$sample: {size: parseInt(req.params.count)}}]
-  )
-  .then(random => res.json(random))
-  .catch(err => res.json(err))
-})
-
+router.route("/random/:count")
+.get(triviaController.getRandom)
 
 module.exports = router;

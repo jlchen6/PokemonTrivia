@@ -2,19 +2,19 @@ const router = require("express").Router();
 const db = require("../models");
 
 // Get the trivia data for all pokemon in the DB. 
-router.get("/api/pokemon", (req, res) => {
+router.get("/pokemon", (req, res) => {
  
-  db.Trivia.find({
-
-  })
+  db.Trivia.find({})
     .then(trivia => res.json(trivia))
-    .catch(err => res.status(422).end());
+    .catch(err => res.json(err));
 });
 
-router.get("/api/random/:count", (req, res) => {
+router.get("/random/:count", (req, res) => {
   db.Trivia.aggregate(
-    [{$sample: {size: req.params.count}}]
+    [{$sample: {size: parseInt(req.params.count)}}]
   )
+  .then(random => res.json(random))
+  .catch(err => res.json(err))
 })
 
 

@@ -3,16 +3,18 @@ const path = require("path");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const passport = require("passport");
-
-const PORT = process.env.PORT || 3001;
+const routes = require("./routes");
 const app = express();
+
 const apiRoutes = require("./routes/apiRoutes");
 const authRoutes = require("./routes/authRoutes")
 
-// Define middleware here
+const PORT = process.env.PORT || 3001;
+
+// Configure body parsing for AJAX requests
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-// Serve up static assets (usually on heroku)
+// Serve up static assets
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
@@ -35,11 +37,16 @@ let session = require("express-session")({
   resave: false,
   saveUninitialized: false
 });
+// Add routes, both API and view
+app.use(routes);
 
 // Connect to the Mongo DB
 mongoose.connect(
   process.env.MONGODB_URI || "mongodb://localhost/pokemonTrivia",
-  { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true }
+  {
+    useCreateIndex: true,
+    useNewUrlParser: true
+  }
 );
 
 passport.serializeUser((user, done) => done(null, user));
@@ -68,3 +75,7 @@ app.use("/auth", authRoutes);
 app.listen(PORT, function() {
   console.log(`🌎 ==> API server now on port ${PORT}!`);
 });
+// Start the API server
+app.listen(PORT, () =>
+  console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`)
+);

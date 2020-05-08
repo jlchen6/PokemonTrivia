@@ -17,10 +17,6 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
-app.use(cors()); // allows the server to make requests to a different domain
-app.use(passport.initialize());
-app.use(passport.session());
-
 // Define Github Strategy
 const GitHubStrategy = require("passport-github2").Strategy;
 
@@ -30,6 +26,20 @@ let strategy = new GithubStrategy({
   callbackURL: process.env.NODE_ENV === "production" ? null : "/auth/github/callback"
 },
   (accessToken, refreshToken, profile, done) => done(null, profile)
+);
+
+
+// not configured
+let session = require("express-session")({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false
+});
+
+// Connect to the Mongo DB
+mongoose.connect(
+  process.env.MONGODB_URI || "mongodb://localhost/pokemonTrivia",
+  { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true }
 );
 
 passport.serializeUser((user, done) => done(null, user));
@@ -46,11 +56,10 @@ passport.deserializeUser((profile, done) => {
 
 });
 
-// Connect to the Mongo DB
-mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/pokemonTrivia",
-  { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true }
-);
+app.use(session);
+app.use(cors()); // allows the server to make requests to a different domain
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Use apiRoutes
 app.use("/api", apiRoutes(passport));

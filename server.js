@@ -1,6 +1,9 @@
 const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
+const cors = require("cors");
+const passport = require("passport");
+const GithubStrategy = require("passport-github2");
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -13,6 +16,29 @@ app.use(express.json());
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
+
+// Define Github Strategy
+passport.use(new GithubStrategy({
+  clientID: process.env.NODE_ENV === "production" ? process.env.GITHUB_CLIENT_ID_PRODUCTION : process.env.GITHUB_CLIENT_ID,
+  clientSecret: process.env.NODE_ENV === "production" ? process.env.GITHUB_CLIENT_SECRET_PRODUCTION : process.env.GITHUB_CLIENT_SECRET,
+  callbackURL: process.env.NODE_ENV === "production" ? null : "/auth/github/callback"
+},
+  (accessToken, refreshToken, profile, done) => done(null, profile)
+));
+
+passport.serializeUser((user, done) => done(null, user));
+
+passport.deserializeUser((profile, done) => {
+  if (!profile) done(null, {});
+  // console.log(profile)
+  user = {
+    username: profile.username
+  }
+  userController.createOrUpdate(user)
+    .then(dbUser =>(null, dbUser))
+    .catch(err => done(err, null));
+
+});
 
 // Connect to the Mongo DB
 mongoose.connect(

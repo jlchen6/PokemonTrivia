@@ -1,4 +1,5 @@
 module.exports = {
-    Trivia: require("./trivia")
+    Trivia: require("./trivia"),
+    User: require("./user")
   };
   

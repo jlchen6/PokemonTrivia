@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-import React from "react";
-import Pokeball from "./pokeball.gif";
-
-=======
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import './App.css';
@@ -24,11 +19,10 @@ function App() {
           {/* <Route exact path="/lobby" component={Lobby} /> */}
           {/* <Route exact path="/game" component={GameMode} /> */}
           {/* <Route exact path="/final" component={FinalScreen} /> */}
-          {/* <Route component={Landing} /> */}
+          <Route component={Landing} />
         </Switch>
       </div>
     </Router>
   );
 }
->>>>>>> d805c0180186222c38c273e5d078e522d9b61292
-
+export default App;

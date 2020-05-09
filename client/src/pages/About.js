@@ -8,7 +8,6 @@ class About extends Component {
             <h1>About the Game</h1>
             <p>
                 This is a pokemon trivia game meant to test your knowledge on pokemon! Up to 6 players can play at once, competing against the timer to correctly guess the pokemon.
-
             </p>
             <h1>How to Play</h1>
             <p>

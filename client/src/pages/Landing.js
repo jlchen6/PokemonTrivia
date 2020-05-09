@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import Button from "../components/Button";
+import Thumbnail from "../components/Thumbnail/index.js";
 import Jumbotron from "../components/Jumbotron";
 import DeleteBtn from "../components/DeleteBtn";
 import API from "../utils/API";

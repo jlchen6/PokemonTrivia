@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
@@ -6,8 +7,8 @@ const passport = require("passport");
 const routes = require("./routes");
 const app = express();
 
-const apiRoutes = require("./routes/apiRoutes");
-const authRoutes = require("./routes/authRoutes")
+const apiRoutes = require("./routes/api");
+const authRoutes = require("./routes/authRoutes");
 
 const PORT = process.env.PORT || 3001;
 
@@ -22,7 +23,8 @@ if (process.env.NODE_ENV === "production") {
 // Define Github Strategy
 const GitHubStrategy = require("passport-github2").Strategy;
 
-let strategy = new GithubStrategy({
+let strategy = new GitHubStrategy(
+{
   clientID: process.env.NODE_ENV === "production" ? process.env.GITHUB_CLIENT_ID_PRODUCTION : process.env.GITHUB_CLIENT_ID,
   clientSecret: process.env.NODE_ENV === "production" ? process.env.GITHUB_CLIENT_SECRET_PRODUCTION : process.env.GITHUB_CLIENT_SECRET,
   callbackURL: process.env.NODE_ENV === "production" ? null : "/auth/github/callback"
@@ -45,7 +47,8 @@ mongoose.connect(
   process.env.MONGODB_URI || "mongodb://localhost/pokemonTrivia",
   {
     useCreateIndex: true,
-    useNewUrlParser: true
+    useNewUrlParser: true,
+    useUnifiedTopology: true
   }
 );
 
@@ -69,12 +72,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Use apiRoutes
-app.use("/api", apiRoutes(passport));
+app.use("/api", apiRoutes);
 app.use("/auth", authRoutes);
 
-app.listen(PORT, function() {
-  console.log(`🌎 ==> API server now on port ${PORT}!`);
-});
 // Start the API server
 app.listen(PORT, () =>
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`)

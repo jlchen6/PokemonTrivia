@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const passport = require("passport");
 const db = require("../models");
 
 
@@ -16,7 +17,7 @@ router.get("/auth/logout", function(req, res) {
       let redirectUrl;
       process.env.NODE_ENV === "production"
         ? (redirectUrl = "/")
-        : (redirectUrl = "http://localhost:3001/");
+        : (redirectUrl = "http://localhost:3000/");
       res.redirect(redirectUrl);
     }
   );

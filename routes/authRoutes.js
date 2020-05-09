@@ -3,15 +3,15 @@ const passport = require("passport");
 const db = require("../models");
 
 
-router.get("/auth/github", passport.authenticate("github"));
+router.get("/github", passport.authenticate("github"));
 
-router.get("/auth/logout", function(req, res) {
+router.get("/logout", function(req, res) {
     req.logout();
     res.json({ success: true });
   });
 
   router.get(
-    "/auth/github/callback",
+    "/github/callback",
     passport.authenticate("github"),
     (req, res) => {
       let redirectUrl;

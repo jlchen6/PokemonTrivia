@@ -75,9 +75,7 @@ app.use(passport.session());
 app.use("/api", apiRoutes);
 app.use("/auth", authRoutes);
 
-app.listen(PORT, function() {
-  console.log(`🌎 ==> API server now on port ${PORT}!`);
-});
+
 // Start the API server
 app.listen(PORT, () =>
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`)

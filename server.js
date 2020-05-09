@@ -12,6 +12,9 @@ const authRoutes = require("./routes/authRoutes");
 
 const PORT = process.env.PORT || 3001;
 
+app.use(passport.initialize());
+app.use(passport.session());
+
 // Configure body parsing for AJAX requests
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -31,6 +34,8 @@ let strategy = new GitHubStrategy(
 },
   (accessToken, refreshToken, profile, done) => done(null, profile)
 );
+
+passport.use(strategy);
 
 
 // not configured
@@ -68,8 +73,7 @@ passport.deserializeUser((profile, done) => {
 
 app.use(session);
 app.use(cors()); // allows the server to make requests to a different domain
-app.use(passport.initialize());
-app.use(passport.session());
+
 
 // Use apiRoutes
 app.use("/api", apiRoutes);

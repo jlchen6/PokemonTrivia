@@ -1,27 +1,28 @@
 import React from 'react';
-import logo from './logo.svg';
-import Button from './components/Button/button.js'
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import './App.css';
+import Landing from "../src/pages/Landing";
+import About from "../src/pages/About";
+import Lobby from "../src/pages/Lobby";
+import GameMode from "../src/pages/GameMode";
+import FinalScreen from "../src/pages/FinalScreen"
+
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <Button> Test Button </Button> 
-      </header>
-    </div>
+    <Router>
+      <div>
+        <Switch>
+          <Route exact path="/" component={Landing} />
+          <Route exact path="/about" component={About} />
+          <Route exact path="/lobby" component={Lobby} />
+          <Route exact path="/game" component={GameMode} />
+          <Route exact path="/final" component={FinalScreen} />
+          <Route component={Landing} />
+        </Switch>
+      </div>
+    </Router>
   );
 }
 

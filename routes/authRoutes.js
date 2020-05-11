@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const passport = require("passport");
-const db = require("../models");
+// const db = require("../models");
 
 
 router.get("/github", passport.authenticate("github"));

@@ -16,8 +16,8 @@ router.get("/logout", function(req, res) {
     (req, res) => {
       let redirectUrl;
       process.env.NODE_ENV === "production"
-        ? (redirectUrl = "/")
-        : (redirectUrl = "http://localhost:3000/");
+        ? (redirectUrl = "/lobby")
+        : (redirectUrl = "http://localhost:3000/lobby");
       res.redirect(redirectUrl);
     }
   );

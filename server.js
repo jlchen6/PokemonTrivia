@@ -6,6 +6,7 @@ const cors = require("cors");
 const passport = require("passport");
 const routes = require("./routes");
 const app = express();
+const sessionCookie = require("cookie-session");
 
 const apiRoutes = require("./routes/api");
 const authRoutes = require("./routes/authRoutes")
@@ -22,14 +23,20 @@ mongoose.connect(
   }
 );
 
-let session = require("express-session")({
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: false
-});
 
-app.use(session);
+app.use(sessionCookie({
+  maxAge: 24 * 60 * 60 * 1000,
+  keys: [process.env.NODE_ENV === "production" ? process.env.SESSION_SECRET_PRODUCTION : process.env.SESSION_SECRET,],
+  name: "session"
+}))
+// let session = require("express-session")({
+//   secret: process.env.SESSION_SECRET,
+//   resave: false,
+//   saveUninitialized: false
+// });
+
 app.use(passport.initialize());
+// app.use(session);
 
 passport.serializeUser((user, done) => done(null, user));
 

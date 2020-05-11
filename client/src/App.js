@@ -16,7 +16,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={Landing} />
           <Route exact path="/about" component={About} />
-          {/* <Route exact path="/lobby" component={Lobby} /> */}
+          <Route exact path="/lobby" component={Lobby} />
           <Route exact path="/game" component={GameMode} />
           {/* <Route exact path="/final" component={FinalScreen} /> */}
           <Route component={Landing} />

@@ -3,7 +3,7 @@ import Button from "../components/Button/button";
 import GithubAuth from "../components/GithubAuth/index";
 import Pokeball from "../images/pokeball.gif";
 
-function Landing() {
+function Lobby() {
   return (
     <div>
       <h1>Trainer Lobby</h1>

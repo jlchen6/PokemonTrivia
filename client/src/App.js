@@ -19,11 +19,10 @@ function App() {
           {/* <Route exact path="/lobby" component={Lobby} /> */}
           <Route exact path="/game" component={GameMode} />
           {/* <Route exact path="/final" component={FinalScreen} /> */}
-          {/* <Route component={Landing} /> */}
+          <Route component={Landing} />
         </Switch>
       </div>
     </Router>
   );
 }
-
 export default App;

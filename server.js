@@ -29,6 +29,7 @@ let session = require("express-session")({
 });
 
 app.use(session);
+app.use(passport.initialize());
 
 passport.serializeUser((user, done) => done(null, user));
 

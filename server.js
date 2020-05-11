@@ -76,7 +76,7 @@ if (process.env.NODE_ENV === "production") {
 
 app.use(
   cors({
-    origin: "http://localhost:3000", // allow to server to accept request from different origin
+    origin: "http://localhost:3001", // allow to server to accept request from different origin
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true // allow session cookie from browser to pass through
   })

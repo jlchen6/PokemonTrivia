@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+/*import React, { useEffect, useState } from "react";
 import Button from "../components/Button/button";
 import Thumbnail from "../components/Thumbnail/index.js";
 import API from "../utils/API";
@@ -87,3 +87,4 @@ function Books() {
 
 
 export default Books;
+*/

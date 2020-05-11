@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import API from "../utils/API"
 import { Question } from "../components/Question/question";
 
-function Landing() {
+function GameMode() {
 
     // state = {
     //     gameQuestions: [],
@@ -30,13 +30,13 @@ function Landing() {
                 setGame({
                     gameQuestions: res.data
                 });
-                loadTrivia(game.gameQuestions[0]);
                 console.log(game.gameQuestions[0]);
+                loadTrivia(game.gameQuestions[0]);
             })
             .catch(err => console.log(err))
     }, [])
 
-    loadTrivia(question){
+    function loadTrivia(question){
         setTrivia(question);
         const dex = question.dex[(Math.floor(Math.random()*question.dex.length))];
         setTrivia({...trivia, dexEntry: dex});        

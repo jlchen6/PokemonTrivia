@@ -7,7 +7,7 @@ function Choices(props){
         <List>
             {props.choices.map(choice => (
                 <ListItem key={choice}>
-                    <Button> {choice} </Button>
+                    <Button onClick={props.onClick} value={choice} > {choice} </Button>
                 </ListItem>
             ))}
         </List>

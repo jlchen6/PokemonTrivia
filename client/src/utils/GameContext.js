@@ -37,13 +37,34 @@ export const Provider = (props) => {
         }
     };
 
+        // Load information for the next question into the state for the current question.
+        const loadQ = (qNum) => {
+            console.log(game);
+            const question = game.questions[qNum];
+            const dexEntry = randomItem(question.dex);
+            let choices = [];
+            for (let i = 0; i < 2; i++) {
+                let addToArray = false;
+                while(!addToArray){
+                    let random = randomItem(question.possibleChoices)
+                    addToArray = random in choices ? false : true;
+                    if(addToArray) {
+                        choices.push(random)
+                    }
+                } 
+            }
+            console.log(choices);
+            setCurrQ({ ...question, dex: dexEntry, possibleChoices: choices });
+        };
+
     const gameContext = {
         game,
         setGame,
         currQ,
         setCurrQ,
         randomItem,
-        nextQ
+        nextQ, 
+        loadQ
     };
 
     return <GameContext.Provider value={gameContext}>{props.children}</GameContext.Provider>;

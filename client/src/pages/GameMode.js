@@ -10,6 +10,13 @@ function GameMode() {
     const gameContext = useContext(GameContext);
     const {game, setGame, currQ, setCurrQ, nextQ, randomItem} = gameContext;
 
+    const [hints, setHints] = useState({
+        dex: "",
+        type: [],
+        hintImage: "",
+        spriteImage: ""
+    })
+
     useEffect(() => {
         API.getRandom(5)
         .then(res => {

@@ -2,13 +2,11 @@ import React, { useEffect, useState } from "react";
 import API from "../utils/API"
 import { Question } from "../components/Question/question";
 import Button from "../components/Button/button";
+import { useGameContext } from "../utils/GameContext";
 
 function GameMode() {
 
-    const [game, setGame] = useState({
-        gameQuestions: [],
-        currQ: 0
-    })
+    const [game, gameDispatch] = useGameContext();
 
     const [trivia, setTrivia] = useState({
         dexEntry: "",

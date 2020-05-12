@@ -13,7 +13,7 @@ function Lobby() {
       <br/>
       <container>Players go here</container>
       <br/>
-      <button >Ready</button>
+      <button>Ready</button>
       <p>Timer Goes Here</p>
     </div>
   );

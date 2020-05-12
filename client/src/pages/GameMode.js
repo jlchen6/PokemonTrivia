@@ -4,6 +4,7 @@ import { Question } from "../components/Question/question";
 import Button from "../components/Button/button";
 import { GameContext } from "../utils/GameContext";
 import Choices from "../components/Choices";
+import { Container, Row } from "../components/Grid";
 
 function GameMode() {
 
@@ -15,7 +16,7 @@ function GameMode() {
         type: [],
         hintImage: "",
         spriteImage: "",
-        choices: []
+        choices: [],
     })
 
     const [timer, setTimer] = useState({
@@ -33,23 +34,8 @@ function GameMode() {
 
 
     // Load information for the first question into the state for the current question.
-    const loadFirstQ = () => {
-        const firstQ = game.questions[0];
-        const dexEntry = randomItem(firstQ.dex);
-        const choices = [];
-        for (let i = 0; i < 3; i++) {
-            let addToArray = false;
-            while(!addToArray){
-                let random = randomItem(firstQ.possibleChoices)
-                addToArray = choices.includes(random)? false : true;
-                if(addToArray) {
-                    choices.push(random)
-                }
-            }
-        }
-        choices.splice(Math.floor(Math.random()*4), 0, firstQ.pokeName);
-        setDisplay({...display, dex: dexEntry, choices: choices});
-        setCurrQ({ ...firstQ, dex: dexEntry, possibleChoices: choices});
+    const startGame = () => {
+        loadNextQ(0);
     };
 
     const onAnswer = (choice) => {
@@ -91,14 +77,18 @@ function GameMode() {
     };
 
     return (
-        <div>
-            <Button onClick={loadFirstQ} >Start Game</Button>
+        <Container>
+            <Button onClick={startGame} >Start Game</Button>
             <p>Current Score: {game.userScore} </p>
             <Question>
+                <Row>
+                <img src={display.hintImage} />
+                <img src={display.spriteImage} />
+                </Row>
                 <p>Hint: {display.dex}</p>
             </Question>
             <Choices onClick={ e => onAnswer(e.target.value)} choices={display.choices} />
-        </div>
+        </Container>
     )
 }
 

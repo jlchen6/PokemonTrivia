@@ -19,6 +19,7 @@ function GameMode() {
     }, [])
 
 
+    // Load information for the first question into the state for the current question.
     const loadFirstQ = () => {
         console.log(game);
         const firstQ = game.questions[0];

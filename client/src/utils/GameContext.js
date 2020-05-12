@@ -28,11 +28,13 @@ export const Provider = (props) => {
         setGame({
             ...game,
             userScore: game.userScore + score,
-            currQ: game.currQ + 1
+            currQ: game.currQ + 1,
+            endGame: (game.currQ+1 < game.questions.length? false: true)
         });
         if (game.currQ < game.questions.length) {
             const next = game.questions[game.currQ];
-            const dex = randomItem(next.dexEntry)
+            console.log(game.questions, next)
+            const dex = randomItem(next.dex)
             setCurrQ({ ...next, dexEntry: dex });
         }
     };
@@ -41,7 +43,7 @@ export const Provider = (props) => {
         const loadQ = (qNum) => {
             console.log(game);
             const question = game.questions[qNum];
-            const dexEntry = randomItem(question.dex);
+            const dexEntry = randomItem(question.dexEntry);
             let choices = [];
             for (let i = 0; i < 2; i++) {
                 let addToArray = false;
@@ -63,8 +65,7 @@ export const Provider = (props) => {
         currQ,
         setCurrQ,
         randomItem,
-        nextQ, 
-        loadQ
+        nextQ
     };
 
     return <GameContext.Provider value={gameContext}>{props.children}</GameContext.Provider>;

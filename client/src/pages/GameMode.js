@@ -43,13 +43,20 @@ function GameMode() {
 
     const onAnswer = (choice) => {
         console.log(choice)
-        // if(choice === currQ.pokeName) {
-        //     nextQ(25);
-        // }
-        // else {
-        //     nextQ(0)
-        // }
-        
+        if(choice === currQ.pokeName) {
+            nextQ(25);
+        }
+        else {
+            nextQ(0)
+        }
+        console.log(game.currQ)
+        if(!game.endGame)
+        {
+            loadNextQ(game.currQ)
+        }
+        else {
+            alert("You've finished the game! Your final score was " + game.userScore)
+        }
     }
 
     const loadNextQ = (n) => {

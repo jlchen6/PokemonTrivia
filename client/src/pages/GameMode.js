@@ -10,11 +10,17 @@ function GameMode() {
     const gameContext = useContext(GameContext);
     const {game, setGame, currQ, setCurrQ, nextQ, randomItem} = gameContext;
 
-    const [hints, setHints] = useState({
+    const [display, setDisplay] = useState({
         dex: "",
         type: [],
         hintImage: "",
-        spriteImage: ""
+        spriteImage: "",
+        choices: []
+    })
+
+    const [timer, setTimer] = useState({
+        totalTime: 0,
+        secsRemaining: 0,
     })
 
     useEffect(() => {
@@ -28,7 +34,6 @@ function GameMode() {
 
     // Load information for the first question into the state for the current question.
     const loadFirstQ = () => {
-        console.log(game);
         const firstQ = game.questions[0];
         const dexEntry = randomItem(firstQ.dex);
         const choices = [];
@@ -37,37 +42,36 @@ function GameMode() {
             while(!addToArray){
                 let random = randomItem(firstQ.possibleChoices)
                 addToArray = choices.includes(random)? false : true;
-                console.log(addToArray, random);
                 if(addToArray) {
                     choices.push(random)
                 }
             }
         }
-        console.log(choices)
         choices.splice(Math.floor(Math.random()*4), 0, firstQ.pokeName);
+        setDisplay({...display, dex: dexEntry, choices: choices});
         setCurrQ({ ...firstQ, dex: dexEntry, possibleChoices: choices});
     };
 
     const onAnswer = (choice) => {
-        console.log(choice)
+        let bonus = 0;
         if(choice === currQ.pokeName) {
             nextQ(25);
+            bonus = 25;
         }
         else {
             nextQ(0)
         }
         console.log(game.currQ)
-        if(!game.endGame)
+        if(game.currQ < 4)
         {
-            loadNextQ(game.currQ)
+            loadNextQ(game.currQ+1)
         }
         else {
-            alert("You've finished the game! Your final score was " + game.userScore)
+            alert("You've finished the game! Your final score was " + (game.userScore + bonus))
         }
     }
 
     const loadNextQ = (n) => {
-        console.log(game);
         const nextQ = game.questions[n];
         const dexEntry = randomItem(nextQ.dex);
         const choices = [];
@@ -76,14 +80,13 @@ function GameMode() {
             while(!addToArray){
                 let random = randomItem(nextQ.possibleChoices)
                 addToArray = choices.includes(random)? false : true;
-                console.log(addToArray, random);
                 if(addToArray) {
                     choices.push(random)
                 }
             }
         }
-        console.log(choices)
         choices.splice(Math.floor(Math.random()*4), 0, nextQ.pokeName);
+        setDisplay({...display, dex: dexEntry, choices: choices});
         setCurrQ({ ...nextQ, dex: dexEntry, possibleChoices: choices});
     };
 
@@ -92,9 +95,9 @@ function GameMode() {
             <Button onClick={loadFirstQ} >Start Game</Button>
             <p>Current Score: {game.userScore} </p>
             <Question>
-                <p>Hint: {currQ.dex}</p>
+                <p>Hint: {display.dex}</p>
             </Question>
-            <Choices onClick={ e => onAnswer(e.target.value)} choices={currQ.possibleChoices} />
+            <Choices onClick={ e => onAnswer(e.target.value)} choices={display.choices} />
         </div>
     )
 }

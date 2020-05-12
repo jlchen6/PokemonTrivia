@@ -76,13 +76,14 @@ function GameMode() {
             }
         }
         choices.splice(Math.floor(Math.random() * 4), 0, nextQ.pokeName);
-        // setDisplay({...display, dex: dexEntry, choices: choices});
-        let displayType = "Type: " + nextQ.type[0] + (nextQ.type.length > 1 ? ", " + nextQ.type[1] : "");
-        let hintImgFile = nextQ.hintImage.split("/");
-        console.log(hintImgFile)
-        let hintPath = imgPath(`./hintImages/${hintImgFile[hintImgFile.length - 1]}`);
-        setDisplay({ ...display, dex: dexEntry, choices: choices, type: displayType, hintImage: hintPath, hintText: "Footprint: " });
-
+        setDisplay({...display, dex: dexEntry, choices: choices});
+        // let displayType = "Type: " + nextQ.type[0] + (nextQ.type.length > 1 ? ", " + nextQ.type[1] : "");
+        // let hintImgFile = nextQ.hintImage.split("/");
+        // console.log(hintImgFile)
+        // let hintPath = imgPath(`./hintImages/${hintImgFile[hintImgFile.length - 1]}`);
+        // let imgFile = nextQ.pokeSprite.split("/");
+        // let imgFilePath = imgPath(`./sprites/${imgFile[imgFile.length - 1]}`)
+        // setDisplay({ ...display, dex: dexEntry, choices: choices, type: displayType, hintImage: hintPath, hintText: "Footprint: ", spriteImage: imgFilePath, spriteText: "Full Image: " });
         setCurrQ({ ...nextQ, dex: dexEntry, possibleChoices: choices });
     };
 
@@ -103,20 +104,12 @@ function GameMode() {
                 break;
             // At 5 seconds left, show the pokemon's sprite. 
             case timeLeft === 5:
-
+                let imgFile = nextQ.pokeSprite.split("/");
+                let imgFilePath = imgPath(`./sprites/${imgFile[imgFile.length - 1]}`)
+                setDisplay({ ...display, spriteImage: imgFilePath, spriteText: "Full Image: " });
                 break;
             default:
 
-        }
-        if (timeLeft <= 15) {
-            let displayType = "Type: " + currQ.type;
-            setDisplay({ ...display, type: displayType })
-        }
-        else if (timeLeft <= 10) {
-            let hintImgFile = nextQ.hintImage.split("/");
-            console.log(hintImgFile)
-            let hintPath = imgPath(`./hintImages/${hintImgFile[hintImgFile.length - 1]}`);
-            setDisplay({ ...display, hintImage: hintPath, hintText: "Footprint: " });
         }
     }
 

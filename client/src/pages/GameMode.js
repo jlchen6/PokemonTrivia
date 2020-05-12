@@ -4,7 +4,7 @@ import { Question } from "../components/Question/question";
 import Button from "../components/Button/button";
 import { GameContext } from "../utils/GameContext";
 import Choices from "../components/Choices";
-import { Container, Row } from "../components/Grid";
+import { Container, Row, Col } from "../components/Grid";
 
 
 function GameMode() {
@@ -27,6 +27,7 @@ function GameMode() {
     const [timer, setTimer] = useState({
         totalTime: 0,
         secsRemaining: 0,
+        interval: null
     })
 
     useEffect(() => {
@@ -76,7 +77,7 @@ function GameMode() {
             }
         }
         choices.splice(Math.floor(Math.random() * 4), 0, nextQ.pokeName);
-        setDisplay({...display, dex: dexEntry, choices: choices});
+        setDisplay({ ...display, dex: dexEntry, choices: choices });
         // let displayType = "Type: " + nextQ.type[0] + (nextQ.type.length > 1 ? ", " + nextQ.type[1] : "");
         // let hintImgFile = nextQ.hintImage.split("/");
         // console.log(hintImgFile)
@@ -119,10 +120,14 @@ function GameMode() {
             <p>Current Score: {game.userScore} </p>
             <Question>
                 <Row>
-                    <h4> {display.hintText} </h4>
-                    <img src={display.hintImage} />
-                    <h4> {display.spriteText} </h4>
-                    <img src={display.spriteImage} />
+                    <Col size="md-4" >
+                        <h4> {display.hintText} </h4>
+                        <img src={display.hintImage} />
+                    </Col>
+                    <Col size="md-4" >
+                        <h4> {display.spriteText} </h4>
+                        <img src={display.spriteImage} />
+                    </Col>
                 </Row>
                 <p>Hint: {display.dex}</p>
                 <p> {display.type} </p>

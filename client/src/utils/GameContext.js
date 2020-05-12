@@ -1,40 +1,53 @@
-import React, { createContext, useReducer, useContext } from "react";
+import React, { createContext, useState } from "react";
 
-const GameContext = createContext({
-    gameQuestions: [],
-    currQ: 0,
-    userScore: 0,
-    gameEnd = false
-});
+export const GameContext = createContext({});
 
-const { Provider } = GameContext;
+export const Provider = () => {
 
-function reducer(state, action) {
+    const [game, setGame] = useState({
+        questions: [],
+        numQuestions: 0,
+        currQ: 0,
+        userScore: 0,
+        endGame: false
+    });
+    const [currQ, setCurrQ] = useState({});
 
-    // If the next question is not the last question, add to the score and increment the question counter 
-    if (state.currQ < state.gameQuestions.length -1) {
-        return [...state, {
-            currQ: state.currQ + 1,
-            userScore: state.userScore + action.bonus
-        }]
-    }
-    // Otherwise, raise a flag to end the game, and add the last score bonus
-    else {
-        return [...state, {
-            userScore: state.userScore + action.bonus,
-            gameEnd: true
-        }]
-    }
+    const loadGame = randomQs => {
+        setGame({ ...game, questions: randomQs });
+        const firstQ = randomQs[0];
+        const dex = randomItem(firstQ.dexEntry);
+        setCurrQ({ ...firstQ, dexEntry: dex });
+    };
 
-}
+    const randomItem = (array) => {
+        return array[Math.floor(Math.random() * array.length)];
+    };
 
-function GameProvider({value = [], ...props}) {
-    const[state, dispatch] = useReducer(reducer, []);
-    return <Provider value={[state, dispatch]} {...props} />;
-}
+    const nextQ = (score) => {
+        setGame({
+            ...game,
+            userScore: game.userScore + score,
+            currQ: game.currQ + 1
+        });
+        if (game.currQ < game.questions.length) {
+            const next = game.questions[game.currQ];
+            const dex = randomItem(next.dexEntry)
+            setCurrQ({ ...next, dexEntry: dex });
+        }
+    };
 
-function useGameContext() {
-    return useContext(GameContext)
-}
+    const gameContext = {
+        game,
+        setGame,
+        currQ,
+        setCurrQ,
+        loadGame,
+        randomItem,
+        nextQ
+    };
 
-export {GameProvider, useGameContext};
+    return <GameContext.Provider value={gameContext}>{children}</GameContext.Provider>;
+};
+
+export const {Consumer} = GameContext;

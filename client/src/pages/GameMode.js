@@ -18,34 +18,41 @@ function GameMode() {
     })
 
     useEffect(() => {
-        API.getRandom(5)
-            .then(res => {
-                console.log(res);
-                setGame({
-                    ...game,
-                    gameQuestions: res.data
-                });
-            })
-            .catch(err => console.log(err))
+        // API.getRandom(5)
+        //     .then(res => {
+        //         console.log(res);
+        //         setGame({
+        //             ...game,
+        //             gameQuestions: res.data
+        //         });
+        //     })
+        //     .catch(err => console.log(err))
+
+        // Display first hint on load
+        console.log(game)
+        const currTrivia = game.gameQuestions[game.currQ];
+        const dex = currTrivia.dexEntry[Math.floor(Math.random()*currTrivia.dexEntry.length)];
+        console.log(currTrivia, dex);
+        setTrivia();
     }, [])
 
-    function loadTrivia(question) {
-        setTrivia(question);
-        const dex = question.dex[(Math.floor(Math.random() * question.dex.length))];
-        setTrivia({ ...trivia, dexEntry: dex });
-    }
+    // function loadTrivia(question) {
+    //     setTrivia(question);
+    //     const dex = question.dex[(Math.floor(Math.random() * question.dex.length))];
+    //     setTrivia({ ...trivia, dexEntry: dex });
+    // }
 
-    function updateQuestion() {
-        console.log(game);
-        loadTrivia(game.gameQuestions[game.currQ]);
-        if (game.currQ < 4) {
-            setGame({ ...game, currQ: game.currQ + 1 });
-        }
-    }
+    // function updateQuestion() {
+    //     console.log(game);
+    //     loadTrivia(game.gameQuestions[game.currQ]);
+    //     if (game.currQ < 4) {
+    //         setGame({ ...game, currQ: game.currQ + 1 });
+    //     }
+    // }
 
     return (
         <div>
-            <Button onClick={updateQuestion}>Load Question</Button>
+            <Button >Load Question</Button>
             <Question>
                 <p>Hint: {trivia.dexEntry}</p>
             </Question>

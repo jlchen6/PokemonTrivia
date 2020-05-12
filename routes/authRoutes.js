@@ -22,5 +22,10 @@ router.get("/logout", function(req, res) {
     }
   );
 
+    router.get("/status", (req, res) => {
+      console.log('REQ.USER: ', req.user)
+      req.user ? res.json(true) : res.json(false);
+    });
+
 
 module.exports = router;

@@ -5,12 +5,6 @@ import Button from "../components/Button/button";
 
 function GameMode() {
 
-    // state = {
-    //     gameQuestions: [],
-    //     currQNum: 0,
-    //     currQDex: "",
-    //     error: ""
-    // }
     const [game, setGame] = useState({
         gameQuestions: [],
         currQ: 0
@@ -43,15 +37,7 @@ function GameMode() {
         setTrivia({ ...trivia, dexEntry: dex });
     }
 
-    function awaitStateChange() {
-        if (game.gameQuestions.length > 0) {
-            console.log(game)
-        } else {
-            console.log("waiting on info");
-        }
-    }
-
-    function doThis() {
+    function updateQuestion() {
         console.log(game);
         loadTrivia(game.gameQuestions[game.currQ]);
         if (game.currQ < 4) {
@@ -61,7 +47,7 @@ function GameMode() {
 
     return (
         <div>
-            <Button onClick={doThis}>Load Question</Button>
+            <Button onClick={updateQuestion}>Load Question</Button>
             <Question>
                 <p>Hint: {trivia.dexEntry}</p>
             </Question>

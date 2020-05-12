@@ -6,9 +6,11 @@ const cors = require("cors");
 const passport = require("passport");
 const routes = require("./routes");
 const app = express();
-
+// const sessionCookie = require("cookie-session");
+const session = require("express-session");
 const apiRoutes = require("./routes/api");
-const authRoutes = require("./routes/authRoutes")
+const authRoutes = require("./routes/authRoutes");
+const userController = require("./controllers/userController");
 
 const PORT = process.env.PORT || 3001;
 
@@ -22,28 +24,23 @@ mongoose.connect(
   }
 );
 
-let session = require("express-session")({
+
+// app.use(sessionCookie({
+//   maxAge: 24 * 60 * 60 * 1000,
+//   keys: [process.env.NODE_ENV === "production" ? process.env.SESSION_SECRET_PRODUCTION : process.env.SESSION_SECRET,],
+//   name: "session"
+// }))
+app.use(session({
   secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: false
-});
+  resave: true,
+  saveUninitialized: true
+}));
 
-app.use(session);
+app.use(require("cookie-parser")());
+
 app.use(passport.initialize());
-
-passport.serializeUser((user, done) => done(null, user));
-
-passport.deserializeUser((profile, done) => {
-  if (!profile) done(null, {});
-  // console.log(profile)
-  user = {
-    username: profile.username
-  }
-  userController.createOrUpdate(user)
-    .then(dbUser =>(null, dbUser))
-    .catch(err => done(err, null));
-
-});
+// app.use(session);
+app.use(passport.session());
 
 // Define Github Strategy
 const GitHubStrategy = require("passport-github2").Strategy;
@@ -61,11 +58,28 @@ let strategy = new GitHubStrategy(
 
   passport.use(strategy);
 
+  passport.serializeUser((user, done) => {
+    // console.log('SERIALIZED USER: ', user.username)
+    done(null, user)
+  });
+
+  passport.deserializeUser((profile, done) => {
+    if (!profile) done(null, {});
+    // console.log('DESERIALIZED USER: ', profile)
+    user = {
+      username: profile.username
+    }
+    userController.createOrUpdate(user)
+      .then(dbUser =>{
+        console.log("route hit")
+        done(null, dbUser)})
+      .catch(err => done(err, null));
+  
+  });
+
+
 // Add routes, both API and view
 app.use(routes);
-
-app.use(passport.initialize());
-app.use(passport.session());
 
 // Configure body parsing for AJAX requests
 app.use(express.urlencoded({ extended: true }));

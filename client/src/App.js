@@ -6,7 +6,7 @@ import About from "../src/pages/About";
 import Lobby from "../src/pages/Lobby";
 import GameMode from "../src/pages/GameMode";
 import FinalScreen from "../src/pages/FinalScreen"
-import { GameProvider } from './utils/GameContext';
+import { Provider } from './utils/GameContext';
 
 
 
@@ -17,11 +17,11 @@ function App() {
         <Switch>
           <Route exact path="/" component={Landing} />
           <Route exact path="/about" component={About} />
-          <GameProvider>
+          <Provider>
           <Route exact path="/lobby" component={Lobby} />
           <Route exact path="/game" component={GameMode} />
           {/* <Route exact path="/final" component={FinalScreen} /> */}
-          </GameProvider>
+          </Provider>
           <Route component={Landing} />
         </Switch>
       </div>

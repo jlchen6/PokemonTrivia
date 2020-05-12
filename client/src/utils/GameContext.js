@@ -2,7 +2,7 @@ import React, { createContext, useState } from "react";
 
 export const GameContext = createContext({});
 
-export const Provider = () => {
+export const Provider = (props) => {
 
     const [game, setGame] = useState({
         questions: [],
@@ -11,14 +11,14 @@ export const Provider = () => {
         userScore: 0,
         endGame: false
     });
-    const [currQ, setCurrQ] = useState({});
-
-    const loadGame = randomQs => {
-        setGame({ ...game, questions: randomQs });
-        const firstQ = randomQs[0];
-        const dex = randomItem(firstQ.dexEntry);
-        setCurrQ({ ...firstQ, dexEntry: dex });
-    };
+    const [currQ, setCurrQ] = useState({
+        dex: "",
+        pokeName: "",
+        type: [],
+        hintImage: "",
+        spriteImage: "",
+        possibleChoices: []
+    });
 
     const randomItem = (array) => {
         return array[Math.floor(Math.random() * array.length)];
@@ -42,12 +42,11 @@ export const Provider = () => {
         setGame,
         currQ,
         setCurrQ,
-        loadGame,
         randomItem,
         nextQ
     };
 
-    return <GameContext.Provider value={gameContext}>{children}</GameContext.Provider>;
+    return <GameContext.Provider value={gameContext}>{props.children}</GameContext.Provider>;
 };
 
 export const {Consumer} = GameContext;

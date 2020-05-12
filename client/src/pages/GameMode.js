@@ -1,61 +1,38 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import API from "../utils/API"
 import { Question } from "../components/Question/question";
 import Button from "../components/Button/button";
-import { useGameContext } from "../utils/GameContext";
+import { GameContext } from "../utils/GameContext";
+import Choices from "../components/Choices";
 
 function GameMode() {
 
-    const [game, gameDispatch] = useGameContext();
-
-    const [trivia, setTrivia] = useState({
-        dexEntry: "",
-        pokemon: "",
-        hintImage: "",
-        spriteImage: "",
-        type: [],
-        choices: []
-    })
+    const gameContext = useContext(GameContext);
+    const {game, setGame, currQ, setCurrQ, nextQ, randomItem} = gameContext;
 
     useEffect(() => {
-        // API.getRandom(5)
-        //     .then(res => {
-        //         console.log(res);
-        //         setGame({
-        //             ...game,
-        //             gameQuestions: res.data
-        //         });
-        //     })
-        //     .catch(err => console.log(err))
-
-        // Display first hint on load
-        console.log(game)
-        const currTrivia = game.gameQuestions[game.currQ];
-        const dex = currTrivia.dexEntry[Math.floor(Math.random()*currTrivia.dexEntry.length)];
-        console.log(currTrivia, dex);
-        setTrivia();
+        API.getRandom(5)
+        .then(res => {
+            setGame({...game, questions: res.data});
+        })
+        .catch(err => console.log(err))
     }, [])
 
-    // function loadTrivia(question) {
-    //     setTrivia(question);
-    //     const dex = question.dex[(Math.floor(Math.random() * question.dex.length))];
-    //     setTrivia({ ...trivia, dexEntry: dex });
-    // }
 
-    // function updateQuestion() {
-    //     console.log(game);
-    //     loadTrivia(game.gameQuestions[game.currQ]);
-    //     if (game.currQ < 4) {
-    //         setGame({ ...game, currQ: game.currQ + 1 });
-    //     }
-    // }
+    const loadFirstQ = () => {
+        console.log(game);
+        const firstQ = game.questions[0];
+        const dexEntry = randomItem(firstQ.dex);
+        setCurrQ({ ...firstQ, dex: dexEntry });
+    };
 
     return (
         <div>
-            <Button >Load Question</Button>
+            <Button onClick={loadFirstQ} >Start Game</Button>
             <Question>
-                <p>Hint: {trivia.dexEntry}</p>
+                <p>Hint: {currQ.dex}</p>
             </Question>
+            <Choices choices={[...currQ.possibleChoices, currQ.pokeName]} />
         </div>
     )
 }

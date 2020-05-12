@@ -1,16 +1,26 @@
 import React, { useEffect, useState } from "react";
 import GithubAuth from "../components/GithubAuth/index";
-import Pokeball from "../images/pokeball.gif";
+import LandingTitle from "../images/titles/TrainerTrivia.png";
+import Background from "../images/pokemonbackground.jpg";
+import Banner from 'react-js-banner';
 
 function Landing() {
   return (
-    <div>
-      <img src={Pokeball} />
-      <h1>Name that Pokémon!</h1>
+    <container>
+<div className="Container">
+    
+    <Banner
+    image={Background}/>
+    
+    <img src={LandingTitle}/>
+    <br/>
+    <h1 textAlign="center">Name that Pokémon!</h1>
+      <h3>Click sign in with Github to get started!</h3>
       <button>
         <GithubAuth />
       </button>
-    </div>
+      </div>
+      </container>
   );
 }
 export default Landing;

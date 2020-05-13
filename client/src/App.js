@@ -17,8 +17,8 @@ function App() {
         <Switch>
           <Route exact path="/" component={Landing} />
           <Route exact path="/about" component={About} />
-          <Provider>
           <Route exact path="/lobby" component={Lobby} />
+          <Provider>
           <Route exact path="/game" component={GameMode} />
           {/* <Route exact path="/final" component={FinalScreen} /> */}
           </Provider>

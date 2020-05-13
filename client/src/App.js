@@ -8,8 +8,6 @@ import GameMode from "../src/pages/GameMode";
 import FinalScreen from "../src/pages/FinalScreen"
 import { Provider } from './utils/GameContext';
 
-
-
 function App() {
   return (
     <Router>
@@ -20,7 +18,7 @@ function App() {
           <Route exact path="/lobby" component={Lobby} />
           <Provider>
           <Route exact path="/game" component={GameMode} />
-          {/* <Route exact path="/final" component={FinalScreen} /> */}
+          <Route exact path="/final" component={FinalScreen} />
           </Provider>
           <Route component={Landing} />
         </Switch>

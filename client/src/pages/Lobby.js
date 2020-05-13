@@ -3,6 +3,7 @@ import API from "../utils/API";
 import Button from "../components/Button/button";
 import GithubAuth from "../components/GithubAuth/index";
 import Pokeball from "../images/pokeball.gif";
+import TrainerLobby from "../images/titles/TrainerLobby.png";
 
 
 function Lobby() {
@@ -27,7 +28,7 @@ function Lobby() {
          
          ) : (
       <div>
-      <h1>Trainer Lobby</h1>
+      <img src={TrainerLobby}/>
       <h3>Waiting on Trainers ...</h3>
       <img src={Pokeball} width="500px"/>
       <br/>

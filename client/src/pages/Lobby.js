@@ -20,6 +20,7 @@ function Lobby() {
     }, [])
 
   return (
+    <div className="lobby-container">
     <div>
         {!auth.isUserLoggedIn ? 
         ( <h1>Please log in</h1>
@@ -30,12 +31,13 @@ function Lobby() {
       <h3>Waiting on Trainers ...</h3>
       <img src={Pokeball} width="500px"/>
       <br/>
-      <container>Players go here</container>
+      <p>Players go here</p>
       <br/>
       <button>Ready</button>
       <p>Timer Goes Here</p>
       </div>
          )}
+    </div>
     </div>
   );
 }

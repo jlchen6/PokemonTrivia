@@ -4,6 +4,7 @@ import { Question } from "../components/Question/question";
 import Button from "../components/Button/button";
 import { GameContext } from "../utils/GameContext";
 import Choices from "../components/Choices";
+import GuessPokemon from "../images/titles/GuessThatPokemon.png";
 
 function GameMode() {
 
@@ -82,6 +83,7 @@ function GameMode() {
 
     return (
         <div className="game-container">
+        <img src={GuessPokemon} />
         <div>
             <Button onClick={loadFirstQ} >Start Game</Button>
             <p>Current Score: {game.userScore} </p>

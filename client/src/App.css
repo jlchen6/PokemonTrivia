@@ -55,7 +55,7 @@ h1, h2, h3, h4, p {
   text-align: center;
 }
 
-button, Button {
+button {
   display: block;
   margin-left: auto;
   margin-right: auto;

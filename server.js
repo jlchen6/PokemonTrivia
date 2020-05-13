@@ -11,6 +11,7 @@ const session = require("express-session");
 const apiRoutes = require("./routes/api");
 const authRoutes = require("./routes/authRoutes");
 const userController = require("./controllers/userController");
+const http = require("http").createServer(app);
 
 const PORT = process.env.PORT || 3001;
 

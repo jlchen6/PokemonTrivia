@@ -82,7 +82,6 @@ function GameMode() {
         // setDisplay({ ...display, dex: dexEntry, choices: choices });
         let displayType = "Type: " + nextQ.type;
         let hintImgFile = nextQ.hintImage.split("/");
-        console.log(hintImgFile)
         let hintPath = imgPath(`./hintImages/${hintImgFile[hintImgFile.length - 1]}`);
         let imgFile = nextQ.pokeSprite.split("/");
         let imgFilePath = imgPath(`./sprites/${imgFile[imgFile.length - 1]}`)
@@ -130,6 +129,7 @@ function GameMode() {
                 if (tock % 5 === 0) {
                     console.log("show a hint")
                     showHints(tock);
+                    console.log("DISPLAY: ", display)
                 }
                 runOnce = true;
             }

@@ -36,3 +36,36 @@
     transform: rotate(360deg);
   }
 }
+
+body {
+  background-image: url(./images/pokemonbackground.jpg);
+  
+}
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  padding: 10px;
+  text-align-last: center;
+}
+
+h1, h2, h3, h4, p {
+  text-align: center;
+}
+
+button {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.landing-container, .lobby-container, .game-container, .about-container, .final-container {
+  background-color: white;
+  margin-top: 20%;
+  margin-bottom: 20%;
+  margin-right: 20%;
+  margin-left: 20%;
+  padding: 1%;
+}

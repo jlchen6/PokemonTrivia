@@ -143,17 +143,10 @@ function GameMode() {
     }
 
     return (
-<<<<<<< HEAD
-        <Container>
+        <div className = "game-container">
             {display.showStart ?
             <Button onClick={startGame} >Start Game</Button>
             : null}
-=======
-        <div className="game-container">
-        <img src={GuessPokemon} />
-        <div>
-            <Button onClick={loadFirstQ} >Start Game</Button>
->>>>>>> 0efa2423cf19b1a6e356a569742049f83a9fb1d1
             <p>Current Score: {game.userScore} </p>
             <p> Time Left: {timer} seconds</p>
             <Question>
@@ -170,14 +163,8 @@ function GameMode() {
                 <p>Hint: {display.dex}</p>
                 <p> {display.type} </p>
             </Question>
-<<<<<<< HEAD
             <Choices onClick={e => onAnswer(e.target.value)} choices={display.choices} />
-        </Container>
-=======
-            <Choices onClick={ e => onAnswer(e.target.value)} choices={currQ.possibleChoices} />
         </div>
-        </div>
->>>>>>> 0efa2423cf19b1a6e356a569742049f83a9fb1d1
     )
 }
 

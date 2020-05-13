@@ -18,7 +18,7 @@ function App() {
           <Provider>
           <Route exact path="/lobby" component={Lobby} />
           <Route exact path="/game" component={GameMode} />
-          {/* <Route exact path="/final" component={FinalScreen} /> */}
+          <Route exact path="/final" component={FinalScreen} />
           </Provider>
           <Route component={Landing} />
         </Switch>

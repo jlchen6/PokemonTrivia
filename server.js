@@ -12,6 +12,7 @@ const apiRoutes = require("./routes/api");
 const authRoutes = require("./routes/authRoutes");
 const userController = require("./controllers/userController");
 const http = require("http").createServer(app);
+const io = require("socket.io")(http);
 
 const PORT = process.env.PORT || 3001;
 
@@ -102,6 +103,14 @@ app.use(
 // Use apiRoutes
 app.use("/auth", authRoutes);
 app.use("/api", apiRoutes);
+
+// socket.io connection
+io.on("connection", (socket) => {
+  console.log("a user connected");
+  socket.on("disconnect", () => {
+    console.log("user disconnected");
+  })
+})
 
 
 // Start the API server

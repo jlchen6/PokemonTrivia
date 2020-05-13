@@ -8,8 +8,6 @@ import GameMode from "../src/pages/GameMode";
 import FinalScreen from "../src/pages/FinalScreen"
 import { Provider } from './utils/GameContext';
 
-
-
 function App() {
   return (
     <Router>

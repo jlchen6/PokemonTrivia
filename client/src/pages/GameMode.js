@@ -17,12 +17,15 @@ function GameMode() {
     const [display, setDisplay] = useState({
         dex: "",
         type: "",
-        typeShow: false,
         hintImage: "",
-        hintImgShow: false,
         spriteImage: "",
-        spriteImgShow: false,
         choices: [],
+    })
+
+    const [showing, setShowing] = useState({
+        typeShow: false,
+        hintImgShow: false,
+        spriteImgShow: false,
         showStart: true
     })
 
@@ -39,7 +42,7 @@ function GameMode() {
 
     // Load information for the first question into the state for the current question.
     const startGame = () => {
-        setDisplay({ ...display, showStart: false })
+        setShowing({ ...showing, showStart: false })
         loadNextQ(0);
         // let interval = setInterval(tick, 1000);
     };
@@ -105,15 +108,15 @@ function GameMode() {
         switch (time) {
             // When there's 15 seconds left, show the pokemon's type
             case 15:
-                setDisplay({ ...display, typeShow: true })
+                setShowing({ ...showing, typeShow: true })
                 break;
             // When there's 10 seconds left, show the hint image
             case 10:
-                setDisplay({ ...display, hintImgShow: true });
+                setShowing({ ...showing, hintImgShow: true });
                 break;
             // At 5 seconds left, show the pokemon's sprite. 
             case 5:
-                setDisplay({ ...display, spriteImgShow: true });
+                setShowing({ ...showing, spriteImgShow: true });
                 break;
             default:
 
@@ -147,8 +150,9 @@ function GameMode() {
     return (
             <div className="game-container">
             <img src={GuessPokemon} />
-
+                {showing.showStart ?
                 <Button onClick={startGame} >Start Game</Button>
+                : null}
                 <p>Current Score: {game.userScore} </p>
                 <p> Time Left: {timer} seconds</p>
                 <Question>
@@ -171,7 +175,7 @@ function GameMode() {
                         </Col>
                     </Row>
                     <p>Hint: {display.dex}</p>
-                    <p> {display.type} </p>
+                    <p> {showing.typeShow? display.type : null} </p>
                 </Question>
                 <Choices onClick={e => onAnswer(e.target.value)} choices={display.choices} />
             </div>

@@ -61,7 +61,7 @@ button {
   margin-right: auto;
 }
 
-.landing-container, .lobby-container, .game-container {
+.landing-container, .lobby-container, .game-container, .about-container {
   background-color: white;
   margin-top: 20%;
   margin-bottom: 20%;

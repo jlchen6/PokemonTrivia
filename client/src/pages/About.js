@@ -5,6 +5,7 @@ class About extends Component {
 
     render() {
         return (
+            <div className="about-container">
             <Container>
                 <Row>
                     <Col size="md-5 sm-9">
@@ -21,6 +22,7 @@ class About extends Component {
                     </Col>
                 </Row>
             </Container>
+            </div>
         )
     }
 

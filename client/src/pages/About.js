@@ -1,32 +1,34 @@
-import React, { Component } from "react"
-import { Container, Row, Col } from "../components/Grid"
+import React, { Component } from "react";
+import AboutTitle from "../images/titles/About.png";
+import HowToPlay from "../images/titles/HowToPlay.png";
+import { Container, Row, Col } from "../components/Grid";
 class About extends Component {
+  render() {
+    return (
+      <div className="about-container">
+        <Container>
+          <Row>
+            <Col size="md-5 sm-9">
+              <img src={HowToPlay} />
+              <p>
+                This is a pokemon trivia game meant to test your knowledge on
+                pokemon! Up to 6 players can play at once, competing against the
+                timer to correctly guess the pokemon.
+              </p>
+            </Col>
+            <Col size="md-5 sm-9">
+              <img src={AboutTitle} />
 
-
-    render() {
-        return (
-            <div className="about-container">
-            <Container>
-                <Row>
-                    <Col size="md-5 sm-9">
-                        <h1>About the Game</h1>
-                        <p>
-                            This is a pokemon trivia game meant to test your knowledge on pokemon! Up to 6 players can play at once, competing against the timer to correctly guess the pokemon.
-                        </p>
-                    </Col>
-                    <Col size="md-5 sm-9">
-                        <h1>How to Play</h1>
-                        <p>
-                            To get started, log in on the main page. After logging in, you can start or enter a game session.
-                        </p>
-                    </Col>
-                </Row>
-            </Container>
-            </div>
-        )
-    }
-
-
+              <p>
+                To get started, log in on the main page. After logging in, you
+                can start or enter a game session.
+              </p>
+            </Col>
+          </Row>
+        </Container>
+      </div>
+    );
+  }
 }
 
 export default About;

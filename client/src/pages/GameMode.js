@@ -25,8 +25,9 @@ function GameMode() {
     })
 
     const [timer, setTimer] = useState({
-        totalTime: 0,
-        secsRemaining: 0,
+        totalTime: 20,
+        timePassed: 0,
+        timerText: "",
         interval: null
     })
 
@@ -42,6 +43,7 @@ function GameMode() {
     // Load information for the first question into the state for the current question.
     const startGame = () => {
         loadNextQ(0);
+        setTimer({...timer, timerText: "Timer: ", timePassed: 0, interval: setInterval(tick, 1000)});
     };
 
     const onAnswer = (choice) => {
@@ -114,10 +116,28 @@ function GameMode() {
         }
     }
 
+    const tick = () => {
+        console.log("TICK ", timer)
+        if (timer.timePassed < timer.totalTime) {
+            setTimer({ ...timer, timePassed: timer.timePassed + 1 })
+            let timeLeft = timer.totalTime - timer.timePassed;
+            if(timeLeft % 5 === 0)
+            {
+                showHints(timeLeft);
+            }
+        }
+        else {
+            alert("Time is up!!")
+            clearInterval(timer.interval);
+            nextQ(0);
+        }
+    }
+
     return (
         <Container>
             <Button onClick={startGame} >Start Game</Button>
             <p>Current Score: {game.userScore} </p>
+            <p> Time Left: {(timer.totalTime - timer.timePassed)} seconds</p>
             <Question>
                 <Row>
                     <Col size="md-4" >

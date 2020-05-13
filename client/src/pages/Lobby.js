@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import API from "../utils/API";
 import Button from "../components/Button/button";
-import GithubAuth from "../components/GithubAuth/index";
 import Pokeball from "../images/pokeball.gif";
-
+import {Link} from 'react-router-dom'
 
 function Lobby() {
 
@@ -33,7 +32,9 @@ function Lobby() {
       <br/>
       <p>Players go here</p>
       <br/>
-      <button>Ready</button>
+      <Link to="/game">
+      <Button>Ready</Button>
+      </Link>
       <p>Timer Goes Here</p>
       </div>
          )}

@@ -39,7 +39,7 @@ function GameMode() {
 
     // Load information for the first question into the state for the current question.
     const startGame = () => {
-        setDisplay({...display, showStart: false})
+        setDisplay({ ...display, showStart: false })
         loadNextQ(0);
         // let interval = setInterval(tick, 1000);
     };
@@ -87,7 +87,8 @@ function GameMode() {
         let imgFile = nextQ.pokeSprite.split("/");
         let imgFilePath = imgPath(`./sprites/${imgFile[imgFile.length - 1]}`)
         setDisplay({ ...display, dex: dexEntry, choices: choices, type: displayType, hintImage: hintPath, spriteImage: imgFilePath });
-        setGame(game => {return {
+        setGame(game => {
+            return {
                 ...game,
                 currQ:
                 {
@@ -96,7 +97,8 @@ function GameMode() {
                     possibleChoices:
                         choices
                 }
-            }});
+            }
+        });
     };
 
     const showHints = (time) => {
@@ -112,7 +114,7 @@ function GameMode() {
                 break;
             // At 5 seconds left, show the pokemon's sprite. 
             case 5:
-                setDisplay({ ...display, spriteImgShow: true});
+                setDisplay({ ...display, spriteImgShow: true });
                 break;
             default:
 
@@ -143,28 +145,36 @@ function GameMode() {
     }
 
     return (
-        <div className = "game-container">
-            {display.showStart ?
-            <Button onClick={startGame} >Start Game</Button>
-            : null}
-            <p>Current Score: {game.userScore} </p>
-            <p> Time Left: {timer} seconds</p>
-            <Question>
-                <Row>
-                    <Col size="xs-4" >
-                        <h4> Footprint:  </h4>
-                        <img src={display.hintImage} />
-                    </Col>
-                    <Col size="xs-4" >
-                        <h4> Sprite:  </h4>
-                        <img src={display.spriteImage} />
-                    </Col>
-                </Row>
-                <p>Hint: {display.dex}</p>
-                <p> {display.type} </p>
-            </Question>
-            <Choices onClick={e => onAnswer(e.target.value)} choices={display.choices} />
-        </div>
+            <div className="game-container">
+            <img src={GuessPokemon} />
+
+                <Button onClick={startGame} >Start Game</Button>
+                <p>Current Score: {game.userScore} </p>
+                <p> Time Left: {timer} seconds</p>
+                <Question>
+                    <Row>
+                        <Col size="xs-5" >
+                            <Row>
+                                <h4> Footprint:  </h4>
+                            </Row>
+                            <Row>
+                                <img src={display.hintImage} />
+                            </Row>
+                        </Col>
+                        <Col size="xs-5" >
+                            <Row>
+                                <h4> Sprite:  </h4>
+                            </Row>
+                            <Row>
+                                <img src={display.spriteImage} />
+                            </Row>
+                        </Col>
+                    </Row>
+                    <p>Hint: {display.dex}</p>
+                    <p> {display.type} </p>
+                </Question>
+                <Choices onClick={e => onAnswer(e.target.value)} choices={display.choices} />
+            </div>
     )
 }
 

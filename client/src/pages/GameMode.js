@@ -81,6 +81,7 @@ function GameMode() {
     };
 
     return (
+        <div className="game-container">
         <div>
             <Button onClick={loadFirstQ} >Start Game</Button>
             <p>Current Score: {game.userScore} </p>
@@ -88,6 +89,7 @@ function GameMode() {
                 <p>Hint: {currQ.dex}</p>
             </Question>
             <Choices onClick={ e => onAnswer(e.target.value)} choices={currQ.possibleChoices} />
+        </div>
         </div>
     )
 }

@@ -97,7 +97,7 @@ app.use(
 app.use("/auth", authRoutes);
 app.use("/api", apiRoutes);
 app.use("*", function(req, res) {
-  res.sendFile(path.join(__dirname, "../client/build/index.html"));
+  res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 
 

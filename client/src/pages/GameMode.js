@@ -6,8 +6,9 @@ import { GameContext } from "../utils/GameContext";
 import Choices from "../components/Choices";
 import { Container, Row, Col } from "../components/Grid";
 import GuessPokemon from "../images/titles/GuessThatPokemon.png";
+import {withRouter} from "react-router";
 
-function GameMode() {
+function GameMode(props) {
     const gameContext = useContext(GameContext);
     const { game, setGame, nextQ, randomItem } = gameContext;
 
@@ -69,11 +70,15 @@ function GameMode() {
         if (game.currQNum < 4) {
             loadNextQ(game.currQNum + 1);
         } else {
-            alert(
-                "You've finished the game! Your final score was " +
-                (game.userScore + bonus)
-            );
+            // alert(
+            //     "You've finished the game! Your final score was " +
+            //     (game.userScore + bonus)
+            // );
             clearInterval(timer.handle);
+            props.history.push({
+                pathname: "/final",
+                data: {finalScore: game.userScore + bonus}
+            })
         }
     };
 

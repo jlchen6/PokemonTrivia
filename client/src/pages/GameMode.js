@@ -70,10 +70,6 @@ function GameMode(props) {
         if (game.currQNum < 4) {
             loadNextQ(game.currQNum + 1);
         } else {
-            // alert(
-            //     "You've finished the game! Your final score was " +
-            //     (game.userScore + bonus)
-            // );
             clearInterval(timer.handle);
             props.history.push({
                 pathname: "/final",

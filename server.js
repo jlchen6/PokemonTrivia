@@ -96,6 +96,10 @@ app.use(
 // Use apiRoutes
 app.use("/auth", authRoutes);
 app.use("/api", apiRoutes);
+app.use("*", function(req, res) {
+  res.sendFile(path.join(__dirname, "../client/build/index.html"));
+});
+
 
 // socket.io connection
 io.on("connection", (socket) => {

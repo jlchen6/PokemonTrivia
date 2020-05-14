@@ -89,7 +89,6 @@ function GameMode() {
             }
         }
         choices.splice(Math.floor(Math.random() * 4), 0, nextQ.pokeName);
-        // setDisplay({ ...display, dex: dexEntry, choices: choices });
         let displayType = "Type: " + nextQ.type;
         let hintImgFile = nextQ.hintImage.split("/");
         let hintPath = imgPath(`./hintImages/${hintImgFile[hintImgFile.length - 1]}`);

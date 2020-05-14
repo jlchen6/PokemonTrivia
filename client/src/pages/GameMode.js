@@ -148,28 +148,27 @@ function GameMode() {
             <div className="game-container">
             <img src={GuessPokemon} />
             {timer.showStart ?
-                <button className="btn btn-primary" onClick={startGame} >Start Game</button>
+                <button className="btn btn-primary text-center" onClick={startGame} >Start Game</button>
                 : null}
             <p>Current Score: {game.userScore} </p>
             <p> Time Left: {timer.seconds} seconds</p>
             <Question>
-                <div className="container">
-                    <div className="row">
+                <div className="game-container text-center">
+                    <div className="row text-center">
                         <div style={{ display: timer.hintImgShow ? "block" : "none" }}>
-                            <div className="col-md-5 text-center" ><h4>Footprint</h4>
-                                <div className="row">
+                            <div className="col-md-5 text-center my-auto" ><h4>Footprint</h4>
+                                <div className="row text-center">
                                     
                                 </div>
-                                     <div className="row">
+                                     <div className="row text-center">
                                     <img src={display.hintImage} />
                                 </div>
                             </div>
                         </div>
                         <div style={{ display: timer.spriteImgShow ? "block" : "none" }}>
-                            <div className="col-md-5 text-center" >
-                                <div className="row"><h4>Sprite</h4>
-                                                                  </div>
-                                <div className="row">
+                            <div className="col-md-5 text-center my-auto" >
+                                <div className="row text-center"><h4>Sprite</h4></div>
+                                <div className="row text-center">
                                     <img src={display.spriteImage} />
                                 </div>
                             </div>

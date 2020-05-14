@@ -29,15 +29,15 @@ function Lobby() {
          ) : (
       <div>
       <img src={TrainerLobby}/>
-      <h3>Waiting on Trainers ...</h3>
+      {/* <h3>Waiting on Trainers ...</h3> */}
       <img src={Pokeball} />
       <br/>
-      <p>Players go here</p>
-      <br/>
+      {/* <p>Players go here</p> */}
+      {/* <br/> */}
       <Link to="/game">
       <button className="text-center justify-content-center">Ready</button>
       </Link>
-      <p>Timer Goes Here</p>
+      {/* <p>Timer Goes Here</p> */}
       </div>
          )}
     </div>

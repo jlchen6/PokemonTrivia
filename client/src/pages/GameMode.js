@@ -8,123 +8,6 @@ import { Container, Row, Col } from "../components/Grid";
 import GuessPokemon from "../images/titles/GuessThatPokemon.png";
 
 function GameMode() {
-<<<<<<< HEAD
-  const gameContext = useContext(GameContext);
-  const { game, setGame, nextQ, randomItem } = gameContext;
-
-  const imgPath = require.context("../../public/images");
-
-  const [display, setDisplay] = useState({
-    dex: "",
-    type: "",
-    typeShow: false,
-    hintImage: "",
-    hintImgShow: false,
-    spriteImage: "",
-    spriteImgShow: false,
-    choices: [],
-    showStart: true,
-  });
-
-  const [timer, setTimer] = useState(20);
-
-  useEffect(() => {
-    API.getRandom(5)
-      .then((res) => {
-        setGame({ ...game, questions: res.data });
-      })
-      .catch((err) => console.log(err));
-  }, []);
-
-  // Load information for the first question into the state for the current question.
-  const startGame = () => {
-    setDisplay({ ...display, showStart: false });
-    loadNextQ(0);
-    // let interval = setInterval(tick, 1000);
-  };
-
-  const onAnswer = (choice) => {
-    console.log(game);
-    let bonus = 0;
-    if (choice === game.currQ.pokeName) {
-      nextQ(25);
-      bonus = 25;
-    } else {
-      nextQ(0);
-    }
-    console.log("CURRENT GAME: ", game);
-    if (game.currQNum < 4) {
-      loadNextQ(game.currQNum + 1);
-    } else {
-      alert(
-        "You've finished the game! Your final score was " +
-          (game.userScore + bonus)
-      );
-    }
-  };
-
-  const loadNextQ = (n) => {
-    setTimer(20);
-    const nextQ = game.questions[n];
-    const dexEntry = randomItem(nextQ.dex);
-    const choices = [];
-    for (let i = 0; i < 3; i++) {
-      let addToArray = false;
-      while (!addToArray) {
-        let random = randomItem(nextQ.possibleChoices);
-        addToArray = choices.includes(random) ? false : true;
-        if (addToArray) {
-          choices.push(random);
-        }
-      }
-    }
-    choices.splice(Math.floor(Math.random() * 4), 0, nextQ.pokeName);
-    // setDisplay({ ...display, dex: dexEntry, choices: choices });
-    let displayType = "Type: " + nextQ.type;
-    let hintImgFile = nextQ.hintImage.split("/");
-    console.log(hintImgFile);
-    let hintPath = imgPath(
-      `./hintImages/${hintImgFile[hintImgFile.length - 1]}`
-    );
-    let imgFile = nextQ.pokeSprite.split("/");
-    let imgFilePath = imgPath(`./sprites/${imgFile[imgFile.length - 1]}`);
-    setDisplay({
-      ...display,
-      dex: dexEntry,
-      choices: choices,
-      type: displayType,
-      hintImage: hintPath,
-      spriteImage: imgFilePath,
-    });
-    setGame((game) => {
-      return {
-        ...game,
-        currQ: {
-          ...nextQ,
-          dex: dexEntry,
-          possibleChoices: choices,
-        },
-      };
-    });
-  };
-
-  const showHints = (time) => {
-    console.log("QUESTION: ", game.currQ);
-    switch (time) {
-      // When there's 15 seconds left, show the pokemon's type
-      case 15:
-        setDisplay({ ...display, typeShow: true });
-        break;
-      // When there's 10 seconds left, show the hint image
-      case 10:
-        setDisplay({ ...display, hintImgShow: true });
-        break;
-      // At 5 seconds left, show the pokemon's sprite.
-      case 5:
-        setDisplay({ ...display, spriteImgShow: true });
-        break;
-      default:
-=======
 
     const gameContext = useContext(GameContext);
     const { game, setGame, nextQ, randomItem } = gameContext;
@@ -206,7 +89,7 @@ function GameMode() {
             }
         }
         choices.splice(Math.floor(Math.random() * 4), 0, nextQ.pokeName);
-        let displayType = "Type: " + nextQ.type;
+        let displayType = nextQ.type;
         let hintImgFile = nextQ.hintImage.split("/");
         let hintPath = imgPath(`./hintImages/${hintImgFile[hintImgFile.length - 1]}`);
         let imgFile = nextQ.pokeSprite.split("/");
@@ -259,112 +142,46 @@ function GameMode() {
         if (timeUp) {
             onAnswer(null);
         }
->>>>>>> 287e2594424cd59883adc13a451ca42482a9e357
     }
-  };
-
-  const tick = () => {
-    let runOnce = false;
-    setTimer((timer) => {
-      let tock = timer - 1;
-      console.log("tock: ", tock);
-      if (tock > 0 && !runOnce) {
-        if (tock % 5 === 0) {
-          console.log("show a hint");
-          showHints(tock);
-        }
-        runOnce = true;
-      } else if (!runOnce) {
-        alert("Time is up!!");
-        nextQ(0);
-        setTimer(20);
-      }
-      return tock;
-    });
-    // console.log("TICK ", timer)
-  };
 
   return (
-    <div className="game-container text-center">
-      <img src={GuessPokemon} />
-
-      <Button onClick={startGame} className="btn btn-primary">
-        Start Game
-      </Button>
-      <p>Current Score: {game.userScore} </p>
-      <p> Time Left: {timer} seconds</p>
-
-      <Question>
-        <div className="row">
-          <div className="col">
-            <h4>Footprint</h4>
-            <div className="row"></div>
-            <div className="row">
-              <img src={display.hintImage} />
-            </div>
-          </div>
-
-<<<<<<< HEAD
-          <div className="col text-center">
-            <h4>Sprite</h4>
-            <div className="row"></div>
-            <div className="row">
-              <img src={display.spriteImage} />
-            </div>
-          </div>
-        </div>
-
-        <p>Hint: {display.dex}</p>
-        <p> {display.type} </p>
-      </Question>
-      <Choices
-        onClick={(e) => onAnswer(e.target.value)}
-        choices={display.choices}
-      />
-    </div>
-  );
-=======
-    return (
-        <div className="game-container">
+            <div className="game-container">
             <img src={GuessPokemon} />
             {timer.showStart ?
-                <Button onClick={startGame} >Start Game</Button>
+                <button className="btn btn-primary" onClick={startGame} >Start Game</button>
                 : null}
             <p>Current Score: {game.userScore} </p>
             <p> Time Left: {timer.seconds} seconds</p>
             <Question>
-                <Container>
-                    <Row>
+                <div className="container">
+                    <div className="row">
                         <div style={{ display: timer.hintImgShow ? "block" : "none" }}>
-                            <Col size="xs-5" >
-                                <Row>
-                                    <h4> Footprint:  </h4>
-                                </Row>
-                                <Row>
+                            <div className="col-md-5 text-center" ><h4>Footprint</h4>
+                                <div className="row">
+                                    
+                                </div>
+                                     <div className="row">
                                     <img src={display.hintImage} />
-                                </Row>
-                            </Col>
+                                </div>
+                            </div>
                         </div>
                         <div style={{ display: timer.spriteImgShow ? "block" : "none" }}>
-                            <Col size="xs-5" >
-                                <Row>
-                                    <h4> Sprite:  </h4>
-                                </Row>
-                                <Row>
+                            <div className="col-md-5 text-center" >
+                                <div className="row"><h4>Sprite</h4>
+                                                                  </div>
+                                <div className="row">
                                     <img src={display.spriteImage} />
-                                </Row>
-                            </Col>
+                                </div>
+                            </div>
                         </div>
-                    </Row>
-                </Container>
-
+                    </div>
+                </div>
                 <p>Hint: {display.dex}</p>
                 <p style={{ display: timer.typeShow ? "block" : "none" }} > Type: {display.type} </p>
             </Question>
             <Choices onClick={e => onAnswer(e.target.value)} choices={display.choices} />
         </div>
-    )
->>>>>>> 287e2594424cd59883adc13a451ca42482a9e357
+            )
 }
 
 export default GameMode;

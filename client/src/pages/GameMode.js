@@ -19,6 +19,7 @@ function GameMode() {
         hintImage: "",
         spriteImage: "",
         choices: [],
+        pokeName: ""
     });
 
     const [timer, setTimer] = useState({
@@ -28,6 +29,7 @@ function GameMode() {
         spriteImgShow: false,
         showStart: true,
         handle: null,
+        timeUp: false
     });
 
     const initTimer = {
@@ -35,6 +37,7 @@ function GameMode() {
         typeShow: false,
         hintImgShow: false,
         spriteImgShow: false,
+        timeUp: false
     };
 
     useEffect(() => {
@@ -95,12 +98,23 @@ function GameMode() {
         choices.splice(Math.floor(Math.random() * 4), 0, nextQ.pokeName);
 
         let displayType = nextQ.type;
-        displayType = displayType.join();
+        if (typeof displayType === "object") {
+            displayType = displayType.join();
+        }
         let hintImgFile = nextQ.hintImage.split("/");
         let hintPath = imgPath(`./hintImages/${hintImgFile[hintImgFile.length - 1]}`);
         let imgFile = nextQ.pokeSprite.split("/");
         let imgFilePath = imgPath(`./sprites/${imgFile[imgFile.length - 1]}`)
-        setDisplay({ ...display, dex: dexEntry, choices: choices, type: displayType, hintImage: hintPath, spriteImage: imgFilePath });
+        let name = nextQ.pokeName;
+        setDisplay({
+            ...display,
+            dex: dexEntry,
+            choices: choices,
+            type: displayType,
+            hintImage: hintPath,
+            spriteImage: imgFilePath,
+            pokeName: name
+        });
         setGame(game => {
             return {
                 ...game,
@@ -115,7 +129,6 @@ function GameMode() {
         });
     }
     const tick = () => {
-        let timeUp = false;
         setTimer((timer) => {
             let tock = { ...timer, seconds: timer.seconds - 1 };
             if (tock.seconds > 0) {
@@ -136,15 +149,10 @@ function GameMode() {
                     default:
                 }
             } else {
-                timeUp = true;
+                tock.timeUp = true;
             }
-            console.log("tock: ", tock);
             return tock;
         });
-        // console.log("TICK ", timer)
-        if (timeUp) {
-            onAnswer(null);
-        }
     };
 
     return (
@@ -157,8 +165,15 @@ function GameMode() {
                     </button>
                 ) : null}
                 <p>Current Score: {game.userScore} </p>
-                <p> Time Left: {timer.seconds} seconds</p>
-                <Question>
+                {timer.timeUp ?
+                    (
+                        <div>
+                            <h2>Time is up! The answer was: {display.pokeName} </h2>
+                            <button className="btn btn-primary text-center" onClick={(e) => onAnswer(e.target.value)} > Next Question </button>
+                        </div>
+                    )
+                    : <p> Time Left: {timer.seconds} seconds</p>}
+                <Question style={{ display: timer.timeUp ? "none" : "block" }}>
                     <div className="game-container text-center">
                         <div className="row text-center">
                             <div style={{ display: timer.hintImgShow ? "block" : "none" }}>
@@ -182,16 +197,18 @@ function GameMode() {
                             </div>
                         </div>
                     </div>
-                    <p>Hint: {display.dex}</p>
-                    <p style={{ display: timer.typeShow ? "block" : "none" }}>
+                    <p> Hint: {display.dex}</p>
+                    <p style={{ display: timer.typeShow? "block" : "none" }}>
                         {" "}
             Type: {display.type}{" "}
                     </p>
                 </Question>
+                {timer.timeUp ? null 
+                :
                 <Choices
-                    onClick={(e) => onAnswer(e.target.value)}
-                    choices={display.choices}
-                />
+                onClick={(e) => onAnswer(e.target.value)}
+                choices={display.choices}/>}
+
             </div>
         </div>
     );

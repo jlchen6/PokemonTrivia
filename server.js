@@ -6,7 +6,6 @@ const cors = require("cors");
 const passport = require("passport");
 const routes = require("./routes");
 const app = express();
-// const sessionCookie = require("cookie-session");
 const session = require("express-session");
 const apiRoutes = require("./routes/api");
 const authRoutes = require("./routes/authRoutes");
@@ -26,12 +25,6 @@ mongoose.connect(
   }
 );
 
-
-// app.use(sessionCookie({
-//   maxAge: 24 * 60 * 60 * 1000,
-//   keys: [process.env.NODE_ENV === "production" ? process.env.SESSION_SECRET_PRODUCTION : process.env.SESSION_SECRET,],
-//   name: "session"
-// }))
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: true,

@@ -22,14 +22,21 @@ function GameMode() {
         choices: [],
     })
 
-    const [showing, setShowing] = useState({
+    const [timer, setTimer] = useState({
+        seconds: 20,
         typeShow: false,
         hintImgShow: false,
         spriteImgShow: false,
-        showStart: true
+        showStart: true,
+        handle: null
     })
 
-    const [timer, setTimer] = useState(20)
+    const initTimer = {
+        seconds: 20,
+        typeShow: false,
+        hintImgShow: false,
+        spriteImgShow: false,
+    }
 
     useEffect(() => {
         API.getRandom(5)
@@ -42,17 +49,16 @@ function GameMode() {
 
     // Load information for the first question into the state for the current question.
     const startGame = () => {
-        setShowing({ ...showing, showStart: false })
         loadNextQ(0);
-        // let interval = setInterval(tick, 1000);
+        let interval = setInterval(tick, 1000);
+        setTimer(timer => { return { ...timer, showStart: false, handle: interval } })
     };
 
     const onAnswer = (choice) => {
-        console.log(game)
         let bonus = 0;
         if (choice === game.currQ.pokeName) {
-            nextQ(25);
-            bonus = 25;
+            bonus = 5*timer.seconds;
+            nextQ(bonus);
         }
         else {
             nextQ(0)
@@ -63,11 +69,12 @@ function GameMode() {
         }
         else {
             alert("You've finished the game! Your final score was " + (game.userScore + bonus))
+            clearInterval(timer.handle)
         }
     }
 
     const loadNextQ = (n) => {
-        setTimer(20)
+        setTimer(timer => { return { ...timer, ...initTimer } })
         const nextQ = game.questions[n];
         const dexEntry = randomItem(nextQ.dex);
         const choices = [];
@@ -103,82 +110,80 @@ function GameMode() {
         });
     };
 
-    const showHints = (time) => {
-        console.log("QUESTION: ", game.currQ)
-        switch (time) {
-            // When there's 15 seconds left, show the pokemon's type
-            case 15:
-                setShowing({ ...showing, typeShow: true })
-                break;
-            // When there's 10 seconds left, show the hint image
-            case 10:
-                setShowing({ ...showing, hintImgShow: true });
-                break;
-            // At 5 seconds left, show the pokemon's sprite. 
-            case 5:
-                setShowing({ ...showing, spriteImgShow: true });
-                break;
-            default:
-
-        }
-    }
-
     const tick = () => {
-        let runOnce = false;
+        let timeUp = false;
         setTimer(timer => {
-            let tock = timer - 1
-            console.log("tock: ", tock)
-            if (tock > 0 && !runOnce) {
-                if (tock % 5 === 0) {
-                    console.log("show a hint")
-                    showHints(tock);
-                    console.log("DISPLAY: ", display)
+            let tock = { ...timer, seconds: timer.seconds - 1 }
+            if (tock.seconds > 0) {
+                switch (tock.seconds) {
+                    // When there's 15 seconds left, show the pokemon's type
+                    case 15:
+                        console.log("SHOWING TYPE")
+                        tock.typeShow = true;
+                        break;
+                    // When there's 10 seconds left, show the hint image
+                    case 10:
+                        tock.hintImgShow = true;
+                        break;
+                    // At 5 seconds left, show the pokemon's sprite. 
+                    case 5:
+                        tock.spriteImgShow = true;
+                        break;
+                    default:
+
                 }
-                runOnce = true;
             }
-            else if (!runOnce) {
-                alert("Time is up!!")
-                nextQ(0);
-                setTimer(20)
+            else {
+                timeUp = true;
             }
+            console.log("tock: ", tock)
             return tock;
         });
         // console.log("TICK ", timer)
-
+        if (timeUp) {
+            onAnswer(null);
+        }
     }
 
     return (
-            <div className="game-container">
+        <div className="game-container">
             <img src={GuessPokemon} />
-                {showing.showStart ?
+            {timer.showStart ?
                 <Button onClick={startGame} >Start Game</Button>
                 : null}
-                <p>Current Score: {game.userScore} </p>
-                <p> Time Left: {timer} seconds</p>
-                <Question>
+            <p>Current Score: {game.userScore} </p>
+            <p> Time Left: {timer.seconds} seconds</p>
+            <Question>
+                <Container>
                     <Row>
-                        <Col size="xs-5" >
-                            <Row>
-                                <h4> Footprint:  </h4>
-                            </Row>
-                            <Row>
-                                <img src={display.hintImage} />
-                            </Row>
-                        </Col>
-                        <Col size="xs-5" >
-                            <Row>
-                                <h4> Sprite:  </h4>
-                            </Row>
-                            <Row>
-                                <img src={display.spriteImage} />
-                            </Row>
-                        </Col>
+                        <div style={{ display: timer.hintImgShow ? "block" : "none" }}>
+                            <Col size="xs-5" >
+                                <Row>
+                                    <h4> Footprint:  </h4>
+                                </Row>
+                                <Row>
+                                    <img src={display.hintImage} />
+                                </Row>
+                            </Col>
+                        </div>
+                        <div style={{ display: timer.spriteImgShow ? "block" : "none" }}>
+                            <Col size="xs-5" >
+                                <Row>
+                                    <h4> Sprite:  </h4>
+                                </Row>
+                                <Row>
+                                    <img src={display.spriteImage} />
+                                </Row>
+                            </Col>
+                        </div>
                     </Row>
-                    <p>Hint: {display.dex}</p>
-                    <p> {showing.typeShow? display.type : null} </p>
-                </Question>
-                <Choices onClick={e => onAnswer(e.target.value)} choices={display.choices} />
-            </div>
+                </Container>
+
+                <p>Hint: {display.dex}</p>
+                <p style={{ display: timer.typeShow ? "block" : "none" }} > Type: {display.type} </p>
+            </Question>
+            <Choices onClick={e => onAnswer(e.target.value)} choices={display.choices} />
+        </div>
     )
 }
 

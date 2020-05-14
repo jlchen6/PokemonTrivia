@@ -44,7 +44,7 @@ let strategy = new GitHubStrategy(
 {
   clientID: process.env.NODE_ENV === "production" ? process.env.GITHUB_CLIENT_ID_PRODUCTION : process.env.GITHUB_CLIENT_ID,
   clientSecret: process.env.NODE_ENV === "production" ? process.env.GITHUB_CLIENT_SECRET_PRODUCTION : process.env.GITHUB_CLIENT_SECRET,
-  callbackURL: process.env.NODE_ENV === "production" ? null : "/auth/github/callback"
+  callbackURL: process.env.NODE_ENV === "production" ? "https://mysterious-tundra-77712.herokuapp.com/auth/github/callback" : "/auth/github/callback"
 },
   (accessToken, refreshToken, profile, done) => {
     console.log("Authenticating with Github");

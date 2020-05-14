@@ -30,7 +30,7 @@ function Lobby() {
       <div>
       <img src={TrainerLobby}/>
       <h3>Waiting on Trainers ...</h3>
-      <img src={Pokeball} width="500px"/>
+      <img src={Pokeball} />
       <br/>
       <p>Players go here</p>
       <br/>

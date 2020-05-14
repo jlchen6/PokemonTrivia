@@ -49,7 +49,7 @@ img {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 100%;
+  width: 50%;
   padding: 10px;
   text-align-last: center;
 }
@@ -71,4 +71,10 @@ button {
   margin-right: 20%;
   margin-left: 20%;
   padding: 1%;
+}
+.row {
+  text-align: center;
+}
+.col-md-1 {
+  display:inline-block;
 }

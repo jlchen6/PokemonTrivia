@@ -8,6 +8,7 @@ import { Container, Row, Col } from "../components/Grid";
 import GuessPokemon from "../images/titles/GuessThatPokemon.png";
 
 function GameMode() {
+<<<<<<< HEAD
   const gameContext = useContext(GameContext);
   const { game, setGame, nextQ, randomItem } = gameContext;
 
@@ -123,6 +124,142 @@ function GameMode() {
         setDisplay({ ...display, spriteImgShow: true });
         break;
       default:
+=======
+
+    const gameContext = useContext(GameContext);
+    const { game, setGame, nextQ, randomItem } = gameContext;
+
+    const imgPath = require.context("../../public/images")
+
+    const [display, setDisplay] = useState({
+        dex: "",
+        type: "",
+        hintImage: "",
+        spriteImage: "",
+        choices: [],
+    })
+
+    const [timer, setTimer] = useState({
+        seconds: 20,
+        typeShow: false,
+        hintImgShow: false,
+        spriteImgShow: false,
+        showStart: true,
+        handle: null
+    })
+
+    const initTimer = {
+        seconds: 20,
+        typeShow: false,
+        hintImgShow: false,
+        spriteImgShow: false,
+    }
+
+    useEffect(() => {
+        API.getRandom(5)
+            .then(res => {
+                setGame({ ...game, questions: res.data });
+            })
+            .catch(err => console.log(err))
+    }, [])
+
+
+    // Load information for the first question into the state for the current question.
+    const startGame = () => {
+        loadNextQ(0);
+        let interval = setInterval(tick, 1000);
+        setTimer(timer => { return { ...timer, showStart: false, handle: interval } })
+    };
+
+    const onAnswer = (choice) => {
+        let bonus = 0;
+        if (choice === game.currQ.pokeName) {
+            bonus = 5*timer.seconds;
+            nextQ(bonus);
+        }
+        else {
+            nextQ(0)
+        }
+        console.log("CURRENT GAME: ", game)
+        if (game.currQNum < 4) {
+            loadNextQ(game.currQNum + 1)
+        }
+        else {
+            alert("You've finished the game! Your final score was " + (game.userScore + bonus))
+            clearInterval(timer.handle)
+        }
+    }
+
+    const loadNextQ = (n) => {
+        setTimer(timer => { return { ...timer, ...initTimer } })
+        const nextQ = game.questions[n];
+        const dexEntry = randomItem(nextQ.dex);
+        const choices = [];
+        for (let i = 0; i < 3; i++) {
+            let addToArray = false;
+            while (!addToArray) {
+                let random = randomItem(nextQ.possibleChoices)
+                addToArray = choices.includes(random)&&(random != nextQ.pokeName) ? false : true;
+                if (addToArray) {
+                    choices.push(random)
+                }
+            }
+        }
+        choices.splice(Math.floor(Math.random() * 4), 0, nextQ.pokeName);
+        let displayType = "Type: " + nextQ.type;
+        let hintImgFile = nextQ.hintImage.split("/");
+        let hintPath = imgPath(`./hintImages/${hintImgFile[hintImgFile.length - 1]}`);
+        let imgFile = nextQ.pokeSprite.split("/");
+        let imgFilePath = imgPath(`./sprites/${imgFile[imgFile.length - 1]}`)
+        setDisplay({ ...display, dex: dexEntry, choices: choices, type: displayType, hintImage: hintPath, spriteImage: imgFilePath });
+        setGame(game => {
+            return {
+                ...game,
+                currQ:
+                {
+                    ...nextQ,
+                    dex: dexEntry,
+                    possibleChoices:
+                        choices
+                }
+            }
+        });
+    };
+
+    const tick = () => {
+        let timeUp = false;
+        setTimer(timer => {
+            let tock = { ...timer, seconds: timer.seconds - 1 }
+            if (tock.seconds > 0) {
+                switch (tock.seconds) {
+                    // When there's 15 seconds left, show the pokemon's type
+                    case 15:
+                        console.log("SHOWING TYPE")
+                        tock.typeShow = true;
+                        break;
+                    // When there's 10 seconds left, show the hint image
+                    case 10:
+                        tock.hintImgShow = true;
+                        break;
+                    // At 5 seconds left, show the pokemon's sprite. 
+                    case 5:
+                        tock.spriteImgShow = true;
+                        break;
+                    default:
+
+                }
+            }
+            else {
+                timeUp = true;
+            }
+            console.log("tock: ", tock)
+            return tock;
+        });
+        // console.log("TICK ", timer)
+        if (timeUp) {
+            onAnswer(null);
+        }
+>>>>>>> 287e2594424cd59883adc13a451ca42482a9e357
     }
   };
 
@@ -167,6 +304,7 @@ function GameMode() {
             </div>
           </div>
 
+<<<<<<< HEAD
           <div className="col text-center">
             <h4>Sprite</h4>
             <div className="row"></div>
@@ -185,6 +323,48 @@ function GameMode() {
       />
     </div>
   );
+=======
+    return (
+        <div className="game-container">
+            <img src={GuessPokemon} />
+            {timer.showStart ?
+                <Button onClick={startGame} >Start Game</Button>
+                : null}
+            <p>Current Score: {game.userScore} </p>
+            <p> Time Left: {timer.seconds} seconds</p>
+            <Question>
+                <Container>
+                    <Row>
+                        <div style={{ display: timer.hintImgShow ? "block" : "none" }}>
+                            <Col size="xs-5" >
+                                <Row>
+                                    <h4> Footprint:  </h4>
+                                </Row>
+                                <Row>
+                                    <img src={display.hintImage} />
+                                </Row>
+                            </Col>
+                        </div>
+                        <div style={{ display: timer.spriteImgShow ? "block" : "none" }}>
+                            <Col size="xs-5" >
+                                <Row>
+                                    <h4> Sprite:  </h4>
+                                </Row>
+                                <Row>
+                                    <img src={display.spriteImage} />
+                                </Row>
+                            </Col>
+                        </div>
+                    </Row>
+                </Container>
+
+                <p>Hint: {display.dex}</p>
+                <p style={{ display: timer.typeShow ? "block" : "none" }} > Type: {display.type} </p>
+            </Question>
+            <Choices onClick={e => onAnswer(e.target.value)} choices={display.choices} />
+        </div>
+    )
+>>>>>>> 287e2594424cd59883adc13a451ca42482a9e357
 }
 
 export default GameMode;

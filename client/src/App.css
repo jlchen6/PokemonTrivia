@@ -39,7 +39,8 @@
 
 body {
   background-image: url(./images/pokemonbackground.jpg);
-  
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 img {

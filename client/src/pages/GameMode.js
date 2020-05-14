@@ -152,24 +152,25 @@ function GameMode() {
                 <p>Current Score: {game.userScore} </p>
                 <p> Time Left: {timer} seconds</p>
                 <Question>
-                    <Row>
-                        <Col size="xs-5" >
-                            <Row>
-                                <h4> Footprint:  </h4>
-                            </Row>
-                            <Row>
+                    <div class="row">
+                        <div class="col my-auto">
+                            <div class="row text-center">
+                                <h4>Footprint</h4>
+                            </div>
+                            <div class="row">
                                 <img src={display.hintImage} />
-                            </Row>
-                        </Col>
-                        <Col size="xs-5" >
-                            <Row>
-                                <h4> Sprite:  </h4>
-                            </Row>
-                            <Row>
+                            </div>
+                        </div>
+                        <div class="col text-center">
+                            <div class="row">
+                            <h4>Sprite</h4>
+                            </div>
+                            <div class="row">
                                 <img src={display.spriteImage} />
-                            </Row>
-                        </Col>
-                    </Row>
+                            </div>
+                        </div>
+                        </div>
+                    
                     <p>Hint: {display.dex}</p>
                     <p> {display.type} </p>
                 </Question>

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import GithubAuth from "../components/GithubAuth/index";
 import LandingTitle from "../images/titles/TrainerTrivia.png";
-import Background from "../images/pokemonbackground.jpg";
-import { Container } from "../components/Grid";
+import {Link} from 'react-router-dom'
+
 
 function Landing() {
   return (
@@ -15,6 +15,12 @@ function Landing() {
         <button>
           <GithubAuth />
         </button>
+        <br/>
+        <Link to="/about">
+        <div className="text-center">
+        <button className="btn btn-primary">About</button>
+              </div>
+              </Link>
       </div>
     </div>
   );

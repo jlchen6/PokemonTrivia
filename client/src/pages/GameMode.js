@@ -1,10 +1,8 @@
 import React, { useEffect, useContext, useState } from "react";
 import API from "../utils/API";
 import { Question } from "../components/Question/question";
-import Button from "../components/Button/button";
 import { GameContext } from "../utils/GameContext";
 import Choices from "../components/Choices";
-import { Container, Row, Col } from "../components/Grid";
 import GuessPokemon from "../images/titles/GuessThatPokemon.png";
 import {withRouter} from "react-router";
 

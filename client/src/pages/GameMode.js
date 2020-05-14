@@ -151,7 +151,8 @@ function GameMode() {
                 <Button onClick={startGame} className="btn btn-primary" >Start Game</Button>
                 <p>Current Score: {game.userScore} </p>
                 <p> Time Left: {timer} seconds</p>
-                <Question>
+
+                <Question className="">
                     <div className="row">
                         <div className="col">
                             <div className="row">

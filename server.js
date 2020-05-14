@@ -74,7 +74,7 @@ let strategy = new GitHubStrategy(
 
 
 // Add routes, both API and view
-app.use(routes);
+
 
 // Configure body parsing for AJAX requests
 app.use(express.urlencoded({ extended: true }));
@@ -94,11 +94,7 @@ app.use(
 
 
 // Use apiRoutes
-app.use("/auth", authRoutes);
-app.use("/api", apiRoutes);
-app.use("*", function(req, res) {
-  res.sendFile(path.join(__dirname, "./client/build/index.html"));
-});
+app.use(routes);
 
 
 // socket.io connection

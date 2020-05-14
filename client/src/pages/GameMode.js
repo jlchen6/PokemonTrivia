@@ -145,27 +145,27 @@ function GameMode() {
     }
 
     return (
-            <div className="game-container">
+            <div className="game-container text-center">
             <img src={GuessPokemon} />
 
-                <Button onClick={startGame} >Start Game</Button>
+                <Button onClick={startGame} className="btn btn-primary" >Start Game</Button>
                 <p>Current Score: {game.userScore} </p>
                 <p> Time Left: {timer} seconds</p>
                 <Question>
-                    <div class="row">
-                        <div class="col my-auto">
-                            <div class="row text-center">
+                    <div className="row">
+                        <div className="col">
+                            <div className="row">
                                 <h4>Footprint</h4>
                             </div>
-                            <div class="row">
+                            <div className="row">
                                 <img src={display.hintImage} />
                             </div>
                         </div>
-                        <div class="col text-center">
-                            <div class="row">
+                        <div className="col text-center">
+                            <div className="row">
                             <h4>Sprite</h4>
                             </div>
-                            <div class="row">
+                            <div className="row">
                                 <img src={display.spriteImage} />
                             </div>
                         </div>

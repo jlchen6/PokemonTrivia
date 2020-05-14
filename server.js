@@ -17,7 +17,7 @@ const PORT = process.env.PORT || 3001;
 
 // Connect to the Mongo DB
 mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://user1:password1@ds127954.mlab.com:27954/heroku_lslkk0n2",
+  process.env.MONGODB_URI || "mongodb://localhost/pokemonTrivia",
   {
     useCreateIndex: true,
     useNewUrlParser: true,

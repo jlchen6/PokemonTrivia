@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useState } from "react";
-import API from "../utils/API"
+import API from "../utils/API";
 import { Question } from "../components/Question/question";
 import Button from "../components/Button/button";
 import { GameContext } from "../utils/GameContext";
@@ -89,7 +89,7 @@ function GameMode() {
             }
         }
         choices.splice(Math.floor(Math.random() * 4), 0, nextQ.pokeName);
-        let displayType = "Type: " + nextQ.type;
+        let displayType = nextQ.type;
         let hintImgFile = nextQ.hintImage.split("/");
         let hintPath = imgPath(`./hintImages/${hintImgFile[hintImgFile.length - 1]}`);
         let imgFile = nextQ.pokeSprite.split("/");
@@ -144,46 +144,44 @@ function GameMode() {
         }
     }
 
-    return (
-        <div className="game-container">
+  return (
+            <div className="game-container">
             <img src={GuessPokemon} />
             {timer.showStart ?
-                <Button onClick={startGame} >Start Game</Button>
+                <button className="btn btn-primary" onClick={startGame} >Start Game</button>
                 : null}
             <p>Current Score: {game.userScore} </p>
             <p> Time Left: {timer.seconds} seconds</p>
             <Question>
-                <Container>
-                    <Row>
+                <div className="container">
+                    <div className="row">
                         <div style={{ display: timer.hintImgShow ? "block" : "none" }}>
-                            <Col size="xs-5" >
-                                <Row>
-                                    <h4> Footprint:  </h4>
-                                </Row>
-                                <Row>
+                            <div className="col-md-5 text-center" ><h4>Footprint</h4>
+                                <div className="row">
+                                    
+                                </div>
+                                     <div className="row">
                                     <img src={display.hintImage} />
-                                </Row>
-                            </Col>
+                                </div>
+                            </div>
                         </div>
                         <div style={{ display: timer.spriteImgShow ? "block" : "none" }}>
-                            <Col size="xs-5" >
-                                <Row>
-                                    <h4> Sprite:  </h4>
-                                </Row>
-                                <Row>
+                            <div className="col-md-5 text-center" >
+                                <div className="row"><h4>Sprite</h4>
+                                                                  </div>
+                                <div className="row">
                                     <img src={display.spriteImage} />
-                                </Row>
-                            </Col>
+                                </div>
+                            </div>
                         </div>
-                    </Row>
-                </Container>
-
+                    </div>
+                </div>
                 <p>Hint: {display.dex}</p>
                 <p style={{ display: timer.typeShow ? "block" : "none" }} > Type: {display.type} </p>
             </Question>
             <Choices onClick={e => onAnswer(e.target.value)} choices={display.choices} />
         </div>
-    )
+            )
 }
 
 export default GameMode;

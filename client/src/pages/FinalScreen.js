@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
-import GithubAuth from "../components/GithubAuth/index";
 import Scores from "../images/titles/Scores.png";
-import Background from "../images/pokemonbackground.jpg";
-import { Container } from "../components/Grid";
+import { Link } from "react-router-dom";
 
 function finalScreen() {
   return (
@@ -12,7 +10,12 @@ function finalScreen() {
         <br />
         <h3 textAlign="center">Player Scores</h3>
         <h4>Player Scores Go Here</h4>
-        <button>Return To Lobby</button>
+        <br />
+        <Link to="/">
+          <div className="text-center">
+            <button className="btn btn-primary">Home</button>
+          </div>
+        </Link>
       </div>
     </div>
   );

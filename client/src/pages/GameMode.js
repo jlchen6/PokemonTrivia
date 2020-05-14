@@ -82,7 +82,7 @@ function GameMode() {
             let addToArray = false;
             while (!addToArray) {
                 let random = randomItem(nextQ.possibleChoices)
-                addToArray = choices.includes(random) ? false : true;
+                addToArray = choices.includes(random)&&(random != nextQ.pokeName) ? false : true;
                 if (addToArray) {
                     choices.push(random)
                 }

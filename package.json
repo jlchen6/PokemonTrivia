@@ -1,7 +1,7 @@
 {
-  "name": "mern",
+  "name": "trainer-trivia",
   "version": "1.0.0",
-  "description": "",
+  "description": "Trainer Trivia application",
   "main": "server.js",
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
@@ -13,7 +13,7 @@
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm run install && npm run build",
     "seed": "node scripts/seedDB.js"
   },
-  "author": "",
+  "author": "Patrick Cain, Julia Chen, Joey Morelos",
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^4.1.2",

@@ -2,7 +2,7 @@ import React from "react";
 
 export function Question(props){
     return (
-        <div>
+        <div style={props.style} >
             {props.children}
         </div>
     )

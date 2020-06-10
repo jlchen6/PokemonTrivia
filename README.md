@@ -6,6 +6,8 @@ This web application will allow users to master their Pokemon identification. Th
 
 Visit [Trainer Trivia](https://mysterious-tundra-77712.herokuapp.com/). You will need a github credentials to sign into the application. Ensure that JavaScript is enabled on your browser.
 
+![landing page](https://github.com/jlchen6/PokemonTrivia/blob/master/client/public/images/trainer-trivia.png?raw=true)
+
 ## Built With
 
 * JavaScript
@@ -13,6 +15,8 @@ Visit [Trainer Trivia](https://mysterious-tundra-77712.herokuapp.com/). You will
 * Express
 * React
 * Node
+
+![quiz](https://github.com/jlchen6/PokemonTrivia/blob/master/client/public/images/trainer-trivia-quiz.PNG?raw=true)
 
 ## Authors
 
